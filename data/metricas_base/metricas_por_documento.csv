@@ -1,0 +1,125 @@
+doc_id,obra_id,unidad_id,unidad_tipo,titulo,autor,year_first_pub,decada_norm,genero_macro_normalizado,lengua,circuito,total_tokens,estructura_social_count,estructura_social_densidad,mediaciones_transatlanticas_count,mediaciones_transatlanticas_densidad,movilidad_orientacion_salida_count,movilidad_orientacion_salida_densidad,pobreza_hambre_alimentacion_count,pobreza_hambre_alimentacion_densidad,terra_casa_pertenencia_count,terra_casa_pertenencia_densidad,trabajo_deuda_count,trabajo_deuda_densidad,violencia_conflicto_count,violencia_conflicto_densidad
+los_pazos_de_ulloa_novela_original_precedida_de_unos_apuntes_autobiograficos_por_emilia_pardo_bazan__cap_001,los_pazos_de_ulloa_novela_original_precedida_de_unos_apuntes_autobiograficos_por_emilia_pardo_bazan,cap_001,capitulo,Los Pazos De Ulloa Novela Original Precedida De Unos Apuntes Autobiográficos Por Emilia Pardo Bazán,Emilia Pardo Bazán,1886,1880,novela,es,,263644,1826,69.26,136,5.16,55,2.09,493,18.7,978,37.1,207,7.85,389,14.75
+aguila_de_blason__sec_001,aguila_de_blason,sec_001,seccion,Águila de blasón,Ramón del Valle-Inclán,1907,1900,teatro,es,,587,8,136.29,0,0.0,0,0.0,0,0.0,2,34.07,0,0.0,2,34.07
+as_cruces_de_pedra_na_galiza_castelao_tei__sec_002,as_cruces_de_pedra_na_galiza_castelao_tei,sec_002,seccion,As cruces de pedra na Galiza,Alfonso Daniel Rodriguez Castelao,1950,1950,ensayo,gl,A Coruña,5763,4,6.94,4,6.94,0,0.0,1,1.74,8,13.88,7,12.15,0,0.0
+as_cruces_de_pedra_na_galiza_castelao_tei__sec_003,as_cruces_de_pedra_na_galiza_castelao_tei,sec_003,seccion,As cruces de pedra na Galiza,Alfonso Daniel Rodriguez Castelao,1950,1950,ensayo,gl,A Coruña,3120,12,38.46,0,0.0,0,0.0,3,9.62,2,6.41,0,0.0,1,3.21
+barbastro__cuento_001,barbastro,cuento_001,cuento,Barbastro,Emilia Pardo Bazán,1900,1900,cuento,es,,1480,8,54.05,0,0.0,5,33.78,0,0.0,6,40.54,2,13.51,2,13.51
+cantares_gallegos__poesia_001,cantares_gallegos,poesia_001,poesia,Cantares Gallegos,Rosalía de Castro,1863,1860,poesia,es,,32300,38,11.76,4,1.24,4,1.24,37,11.46,117,36.22,1,0.31,18,5.57
+cara_de_plata__sec_001,cara_de_plata,sec_001,seccion,Cara de plata,Ramón del Valle-Inclán,1923,1920,teatro,es,,829,3,36.19,0,0.0,0,0.0,0,0.0,7,84.44,4,48.25,4,48.25
+castelao_cousas__cuento_001,castelao_cousas,cuento_001,cuento,Cousas,Alfonso Daniel Rodriguez Castelao,1926,1920,cuento,gl,Galicia,11506,45,39.11,5,4.35,17,14.77,31,26.94,54,46.93,8,6.95,3,2.61
+castelao_os_dous_de_sempre__cap_001,castelao_os_dous_de_sempre,cap_001,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,335,0,0.0,0,0.0,0,0.0,0,0.0,8,238.81,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_002,castelao_os_dous_de_sempre,cap_002,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,393,0,0.0,0,0.0,0,0.0,4,101.78,1,25.45,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_003,castelao_os_dous_de_sempre,cap_003,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,490,2,40.82,0,0.0,0,0.0,6,122.45,1,20.41,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_004,castelao_os_dous_de_sempre,cap_004,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,449,1,22.27,0,0.0,0,0.0,2,44.54,3,66.82,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_005,castelao_os_dous_de_sempre,cap_005,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,543,5,92.08,0,0.0,0,0.0,1,18.42,0,0.0,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_006,castelao_os_dous_de_sempre,cap_006,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,562,2,35.59,5,88.97,1,17.79,3,53.38,3,53.38,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_007,castelao_os_dous_de_sempre,cap_007,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,624,1,16.03,5,80.13,0,0.0,1,16.03,2,32.05,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_008,castelao_os_dous_de_sempre,cap_008,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,480,5,104.17,1,20.83,0,0.0,1,20.83,1,20.83,0,0.0,1,20.83
+castelao_os_dous_de_sempre__cap_009,castelao_os_dous_de_sempre,cap_009,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,444,0,0.0,0,0.0,0,0.0,0,0.0,4,90.09,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_010,castelao_os_dous_de_sempre,cap_010,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,609,0,0.0,0,0.0,0,0.0,2,32.84,0,0.0,2,32.84,0,0.0
+castelao_os_dous_de_sempre__cap_011,castelao_os_dous_de_sempre,cap_011,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,383,2,52.22,0,0.0,0,0.0,1,26.11,1,26.11,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_012,castelao_os_dous_de_sempre,cap_012,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,404,1,24.75,0,0.0,0,0.0,1,24.75,0,0.0,1,24.75,0,0.0
+castelao_os_dous_de_sempre__cap_013,castelao_os_dous_de_sempre,cap_013,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,459,1,21.79,0,0.0,0,0.0,1,21.79,2,43.57,1,21.79,0,0.0
+castelao_os_dous_de_sempre__cap_014,castelao_os_dous_de_sempre,cap_014,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,507,0,0.0,0,0.0,0,0.0,1,19.72,2,39.45,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_015,castelao_os_dous_de_sempre,cap_015,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,361,0,0.0,0,0.0,0,0.0,2,55.4,1,27.7,2,55.4,0,0.0
+castelao_os_dous_de_sempre__cap_016,castelao_os_dous_de_sempre,cap_016,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,529,4,75.61,0,0.0,0,0.0,0,0.0,4,75.61,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_017,castelao_os_dous_de_sempre,cap_017,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,314,1,31.85,0,0.0,0,0.0,0,0.0,3,95.54,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_018,castelao_os_dous_de_sempre,cap_018,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,460,0,0.0,1,21.74,0,0.0,6,130.43,0,0.0,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_019,castelao_os_dous_de_sempre,cap_019,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,475,0,0.0,2,42.11,0,0.0,1,21.05,1,21.05,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_020,castelao_os_dous_de_sempre,cap_020,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,367,2,54.5,0,0.0,0,0.0,3,81.74,1,27.25,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_021,castelao_os_dous_de_sempre,cap_021,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,488,1,20.49,0,0.0,0,0.0,1,20.49,1,20.49,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_022,castelao_os_dous_de_sempre,cap_022,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,442,1,22.62,0,0.0,0,0.0,4,90.5,0,0.0,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_023,castelao_os_dous_de_sempre,cap_023,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,458,0,0.0,0,0.0,0,0.0,0,0.0,0,0.0,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_024,castelao_os_dous_de_sempre,cap_024,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,375,1,26.67,0,0.0,0,0.0,1,26.67,6,160.0,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_025,castelao_os_dous_de_sempre,cap_025,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,408,0,0.0,0,0.0,0,0.0,0,0.0,3,73.53,1,24.51,0,0.0
+castelao_os_dous_de_sempre__cap_026,castelao_os_dous_de_sempre,cap_026,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,494,2,40.49,0,0.0,0,0.0,0,0.0,2,40.49,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_027,castelao_os_dous_de_sempre,cap_027,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,457,1,21.88,0,0.0,0,0.0,1,21.88,2,43.76,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_028,castelao_os_dous_de_sempre,cap_028,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,435,0,0.0,0,0.0,0,0.0,0,0.0,1,22.99,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_029,castelao_os_dous_de_sempre,cap_029,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,491,0,0.0,0,0.0,0,0.0,1,20.37,1,20.37,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_030,castelao_os_dous_de_sempre,cap_030,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,453,0,0.0,0,0.0,0,0.0,1,22.08,0,0.0,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_031,castelao_os_dous_de_sempre,cap_031,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,488,1,20.49,1,20.49,0,0.0,1,20.49,1,20.49,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_032,castelao_os_dous_de_sempre,cap_032,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,426,0,0.0,0,0.0,0,0.0,4,93.9,0,0.0,1,23.47,0,0.0
+castelao_os_dous_de_sempre__cap_033,castelao_os_dous_de_sempre,cap_033,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,423,0,0.0,0,0.0,0,0.0,1,23.64,1,23.64,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_034,castelao_os_dous_de_sempre,cap_034,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,442,0,0.0,3,67.87,5,113.12,3,67.87,1,22.62,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_035,castelao_os_dous_de_sempre,cap_035,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,415,0,0.0,0,0.0,5,120.48,3,72.29,2,48.19,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_036,castelao_os_dous_de_sempre,cap_036,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,522,0,0.0,0,0.0,0,0.0,1,19.16,1,19.16,1,19.16,0,0.0
+castelao_os_dous_de_sempre__cap_037,castelao_os_dous_de_sempre,cap_037,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,523,0,0.0,0,0.0,0,0.0,0,0.0,0,0.0,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_038,castelao_os_dous_de_sempre,cap_038,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,299,1,33.44,1,33.44,3,100.33,1,33.44,1,33.44,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_039,castelao_os_dous_de_sempre,cap_039,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,429,1,23.31,1,23.31,1,23.31,0,0.0,2,46.62,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_040,castelao_os_dous_de_sempre,cap_040,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,357,0,0.0,0,0.0,0,0.0,1,28.01,1,28.01,1,28.01,0,0.0
+castelao_os_dous_de_sempre__cap_041,castelao_os_dous_de_sempre,cap_041,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,443,0,0.0,0,0.0,0,0.0,2,45.15,2,45.15,0,0.0,0,0.0
+castelao_os_dous_de_sempre__cap_042,castelao_os_dous_de_sempre,cap_042,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,403,2,49.63,0,0.0,0,0.0,2,49.63,0,0.0,0,0.0,1,24.81
+castelao_os_dous_de_sempre__cap_043,castelao_os_dous_de_sempre,cap_043,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,529,1,18.9,0,0.0,0,0.0,1,18.9,0,0.0,0,0.0,1,18.9
+castelao_os_dous_de_sempre__cap_044,castelao_os_dous_de_sempre,cap_044,capitulo,Os dous de sempre,Alfonso Daniel Rodriguez Castelao,1934,1930,novela,gl,Galicia,428,0,0.0,1,23.36,0,0.0,0,0.0,2,46.73,0,0.0,0,0.0
+contra_treta__cuento_001,contra_treta,cuento_001,cuento,Contratar,Emilia Pardo Bazán,1894,1890,cuento,es,,1576,4,25.38,1,6.35,19,120.56,6,38.07,10,63.45,6,38.07,0,0.0
+cornada__cuento_001,cornada,cuento_001,cuento,Cornada,Emilia Pardo Bazán,1898,1890,cuento,es,,1557,0,0.0,0,0.0,4,25.69,0,0.0,3,19.27,1,6.42,1,6.42
+curros_enriquez_aires_de_la_tierra__poesia_001,curros_enriquez_aires_de_la_tierra,poesia_001,poesia,Aires De La Tierra,Manuel Curros Enríquez,1880,1880,poesia,gl,Galicia,33203,60,18.07,19,5.72,24,7.23,49,14.76,183,55.12,68,20.48,48,14.46
+de_polizon__cuento_001,de_polizon,cuento_001,cuento,De Polizón,Emilia Pardo Bazán,1895,1890,cuento,es,,1375,0,0.0,1,7.27,13,94.55,0,0.0,4,29.09,2,14.55,3,21.82
+dieste_muriel_tei__unidad_001,dieste_muriel_tei,unidad_001,unidad_unica,Historias e invenciones de Félix Muriel,Rafael Dieste,1943,1940,novela,gl,Buenos Aires,44433,16,3.6,17,3.83,23,5.18,25,5.63,197,44.34,26,5.85,37,8.33
+dieste_viaje_duelo_perdicion_tei__unidad_001,dieste_viaje_duelo_perdicion_tei,unidad_001,unidad_unica,Viaje Duelo y Pérdición,Rafael Dieste,1945,1940,novela,gl,Galicia,49442,136,27.51,11,2.22,19,3.84,10,2.02,232,46.92,86,17.39,61,12.34
+el_baile_del_querubin__cuento_001,el_baile_del_querubin,cuento_001,cuento,El Baile del Querubín,Emilia Pardo Bazán,1891,1890,cuento,es,,3951,16,40.5,1,2.53,0,0.0,1,2.53,15,37.97,0,0.0,2,5.06
+el_indulto__cuento_001,el_indulto,cuento_001,cuento,El Indulto,Emilia Pardo Bazán,1883,1880,cuento,es,,2356,4,16.98,1,4.24,3,12.73,4,16.98,4,16.98,4,16.98,0,0.0
+el_lorito_real__cuento_001,el_lorito_real,cuento_001,cuento,El Lorito Real,Emilia Pardo Bazán,1893,1890,cuento,es,,793,1,12.61,0,0.0,0,0.0,0,0.0,2,25.22,1,12.61,0,0.0
+el_mazo__cuento_001,el_mazo,cuento_001,cuento,El Mazo,Emilia Pardo Bazán,1895,1890,cuento,es,,1737,2,11.51,0,0.0,0,0.0,1,5.76,3,17.27,0,0.0,0,0.0
+el_molino__cuento_001,el_molino,cuento_001,cuento,El Molino,Emilia Pardo Bazán,1892,1890,cuento,es,,2180,1,4.59,0,0.0,2,9.17,0,0.0,8,36.7,3,13.76,4,18.35
+el_morito__cuento_001,el_morito,cuento_001,cuento,El Morito,Emilia Pardo Bazán,1895,1890,cuento,es,,1483,2,13.49,1,6.74,0,0.0,0,0.0,8,53.94,0,0.0,0,0.0
+el_palacio_de_artasar__cuento_001,el_palacio_de_artasar,cuento_001,cuento,El Palacio de Artasar,Emilia Pardo Bazán,1895,1890,cuento,es,,1323,1,7.56,0,0.0,0,0.0,1,7.56,4,30.23,1,7.56,0,0.0
+el_peregrino__cuento_001,el_peregrino,cuento_001,cuento,El Peregrino,Emilia Pardo Bazán,1899,1890,cuento,es,,2059,7,34.0,0,0.0,0,0.0,5,24.28,10,48.57,4,19.43,0,0.0
+el_quinto__cuento_001,el_quinto,cuento_001,cuento,El Quinto,Emilia Pardo Bazán,1895,1890,cuento,es,,1430,3,20.98,0,0.0,0,0.0,2,13.99,4,27.97,0,0.0,1,6.99
+el_revolver__cuento_001,el_revolver,cuento_001,cuento,El Revólver,Emilia Pardo Bazán,1895,1890,cuento,es,,1493,6,40.19,0,0.0,1,6.7,0,0.0,7,46.89,0,0.0,2,13.4
+el_rompecabezas__cuento_001,el_rompecabezas,cuento_001,cuento,El Rompecabezas,Emilia Pardo Bazán,1899,1890,cuento,es,,1231,2,16.25,1,8.12,3,24.37,0,0.0,8,64.99,0,0.0,1,8.12
+el_senor_doctoral__cuento_001,el_senor_doctoral,cuento_001,cuento,Sin_titulo,Emilia Pardo Bazán,1891,1890,cuento,es,,3181,27,84.88,5,15.72,0,0.0,11,34.58,12,37.72,2,6.29,4,12.57
+el_sino__cuento_001,el_sino,cuento_001,cuento,El Sino,Emilia Pardo Bazán,1894,1890,cuento,es,,1492,1,6.7,0,0.0,4,26.81,0,0.0,2,13.4,0,0.0,6,40.21
+el_sonar_del_rio__cuento_001,el_sonar_del_rio,cuento_001,cuento,El Sonar del Río,Emilia Pardo Bazán,1892,1890,cuento,es,,1630,14,85.89,3,18.4,0,0.0,0,0.0,8,49.08,3,18.4,1,6.13
+el_templo__cuento_001,el_templo,cuento_001,cuento,El Templo,Emilia Pardo Bazán,1902,1900,cuento,es,,1447,0,0.0,0,0.0,2,13.82,1,6.91,3,20.73,1,6.91,0,0.0
+el_tetrarca_en_la_aldea__cuento_001,el_tetrarca_en_la_aldea,cuento_001,cuento,El Tetrarca en la Aldea,Emilia Pardo Bazán,1900,1900,cuento,es,,1555,4,25.72,1,6.43,6,38.59,3,19.29,13,83.6,6,38.59,2,12.86
+el_tornado__cuento_001,el_tornado,cuento_001,cuento,El Tornado,Emilia Pardo Bazán,1894,1890,cuento,es,,1819,10,54.98,0,0.0,11,60.47,1,5.5,8,43.98,0,0.0,3,16.49
+el_vino_del_mar__cuento_001,el_vino_del_mar,cuento_001,cuento,El Vino del Mar,Emilia Pardo Bazán,1900,1900,cuento,es,,1403,2,14.26,1,7.13,8,57.02,0,0.0,3,21.38,0,0.0,3,21.38
+el_voto__cuento_001,el_voto,cuento_001,cuento,El Voto,Emilia Pardo Bazán,1894,1890,cuento,es,,1441,10,69.4,0,0.0,13,90.22,0,0.0,7,48.58,3,20.82,1,6.94
+el_voto_de_rosina__cuento_001,el_voto_de_rosina,cuento_001,cuento,El Voto de Rosiña,Emilia Pardo Bazán,1900,1900,cuento,es,,1391,9,64.7,0,0.0,1,7.19,1,7.19,9,64.7,1,7.19,4,28.76
+en_coche_cama__cuento_001,en_coche_cama,cuento_001,cuento,En Coche-cama,Emilia Pardo Bazán,1914,1910,cuento,es,,1644,6,36.5,0,0.0,0,0.0,1,6.08,0,0.0,0,0.0,5,30.41
+en_el_nombre_del_padre__cuento_001,en_el_nombre_del_padre,cuento_001,cuento,En el Nombre del Padre...,Emilia Pardo Bazán,1892,1890,cuento,es,,3385,23,67.95,1,2.95,0,0.0,1,2.95,18,53.18,1,2.95,5,14.77
+en_silencio__cuento_001,en_silencio,cuento_001,cuento,En Silencio,Emilia Pardo Bazán,1922,1920,cuento,es,,1749,9,51.46,0,0.0,6,34.31,3,17.15,6,34.31,6,34.31,2,11.44
+flor_de_santidad_001__sec_001,flor_de_santidad_001,sec_001,seccion,Flor de Santidad. Historia milenaria,Ramón del Valle-Inclán,1904,1900,novela,es,Galicia,18816,117,62.18,2,1.06,1,0.53,27,14.35,85,45.17,14,7.44,17,9.03
+follas_novas__poesia_001,follas_novas,poesia_001,poesia,Follas Novas,Rosalía de Castro,1880,1880,poesia,es,,30133,45,14.93,7,2.32,16,5.31,31,10.29,122,40.49,5,1.66,21,6.97
+fraternidad__cuento_001,fraternidad,cuento_001,cuento,Fraternidad,Emilia Pardo Bazán,1910,1910,cuento,es,,1128,0,0.0,0,0.0,1,8.87,1,8.87,3,26.6,0,0.0,0,0.0
+fuego_a_bordo__cuento_001,fuego_a_bordo,cuento_001,cuento,Fuego a Bordo,Emilia Pardo Bazán,1885,1880,cuento,es,,5596,10,17.87,4,7.15,30,53.61,10,17.87,11,19.66,1,1.79,13,23.23
+idilio__cuento_001,idilio,cuento_001,cuento,Idilio,Emilia Pardo Bazán,1892,1890,cuento,es,,1379,4,29.01,0,0.0,3,21.75,3,21.75,4,29.01,3,21.75,2,14.5
+la_gota_de_sangre_1147839__cap_001,la_gota_de_sangre_1147839,cap_001,capitulo,La Gota De Sangre 1147839,Emilia Pardo Bazán,1911,1910,novela,es,,13612,55,40.41,15,11.02,2,1.47,3,2.2,56,41.14,9,6.61,25,18.37
+la_madre_naturaleza_2011__cap_001,la_madre_naturaleza_2011,cap_001,capitulo,La Madre Naturaleza 2011,Emilia Pardo Bazán,1887,1880,novela,es,,88461,497,56.18,40,4.52,28,3.17,112,12.66,370,41.83,76,8.59,135,15.26
+la_amenaza__cuento_001,la_amenaza,cuento_001,cuento,La Amenaza,Emilia Pardo Bazán,1900,1900,cuento,es,,1854,6,32.36,1,5.39,11,59.33,3,16.18,14,75.51,7,37.76,11,59.33
+la_aventura_del_angel__cuento_001,la_aventura_del_angel,cuento_001,cuento,La Aventura del Ángel,Emilia Pardo Bazán,1897,1890,cuento,es,,1557,0,0.0,0,0.0,1,6.42,0,0.0,5,32.11,0,0.0,1,6.42
+la_bicha__cuento_001,la_bicha,cuento_001,cuento,La Bicha,Emilia Pardo Bazán,1898,1890,cuento,es,,1610,14,86.96,5,31.06,0,0.0,0,0.0,7,43.48,0,0.0,5,31.06
+la_camarona__cuento_001,la_camarona,cuento_001,cuento,La Camarona,Emilia Pardo Bazán,1900,1900,cuento,es,,1193,6,50.29,0,0.0,1,8.38,3,25.15,0,0.0,1,8.38,2,16.76
+la_charca__cuento_001,la_charca,cuento_001,cuento,La Charca,Emilia Pardo Bazán,1910,1910,cuento,es,,1479,8,54.09,1,6.76,0,0.0,2,13.52,0,0.0,0,0.0,1,6.76
+la_corpana__cuento_001,la_corpana,cuento_001,cuento,La Corpana,Emilia Pardo Bazán,1922,1920,cuento,es,,1268,4,31.55,0,0.0,0,0.0,1,7.89,3,23.66,3,23.66,2,15.77
+la_danza_del_peregrino__cuento_001,la_danza_del_peregrino,cuento_001,cuento,La Danza del Peregrino,Emilia Pardo Bazán,1916,1910,cuento,es,,1622,5,30.83,0,0.0,0,0.0,2,12.33,3,18.5,2,12.33,1,6.17
+la_emparedada__cuento_001,la_emparedada,cuento_001,cuento,La Emparedada,Emilia Pardo Bazán,1907,1900,cuento,es,,1131,1,8.84,0,0.0,1,8.84,0,0.0,4,35.37,0,0.0,1,8.84
+la_estrella_blanca__cuento_001,la_estrella_blanca,cuento_001,cuento,La Estrella Blanca,Emilia Pardo Bazán,1912,1910,cuento,es,,2024,1,4.94,1,4.94,1,4.94,0,0.0,4,19.76,0,0.0,4,19.76
+la_exangue__cuento_001,la_exangue,cuento_001,cuento,La Exangüe,Emilia Pardo Bazán,1902,1900,cuento,es,,1323,10,75.59,0,0.0,3,22.68,1,7.56,3,22.68,1,7.56,5,37.79
+la_expiacion__cuento_001,la_expiacion,cuento_001,cuento,La Expiación,Emilia Pardo Bazán,1890,1890,cuento,es,,2184,6,27.47,2,9.16,1,4.58,6,27.47,7,32.05,1,4.58,1,4.58
+la_flor_de_la_salud__cuento_001,la_flor_de_la_salud,cuento_001,cuento,La Flor de la Salud,Emilia Pardo Bazán,1894,1890,cuento,es,,1584,2,12.63,1,6.31,0,0.0,1,6.31,2,12.63,0,0.0,2,12.63
+la_flor_seca__cuento_001,la_flor_seca,cuento_001,cuento,La Flor Seca,Emilia Pardo Bazán,1893,1890,cuento,es,,1436,14,97.49,2,13.93,0,0.0,1,6.96,3,20.89,0,0.0,2,13.93
+la_hoz__cuento_001,la_hoz,cuento_001,cuento,La Hoz,Emilia Pardo Bazán,1922,1920,cuento,es,,1940,12,61.86,1,5.15,1,5.15,7,36.08,14,72.16,5,25.77,2,10.31
+la_mayorazga_de_bouzas__cuento_001,la_mayorazga_de_bouzas,cuento_001,cuento,La Mayorazga de Bouzas,Emilia Pardo Bazán,1900,1900,cuento,es,,3547,41,115.59,1,2.82,3,8.46,8,22.55,16,45.11,6,16.92,5,14.1
+la_mirada__cuento_001,la_mirada,cuento_001,cuento,La Mirada,Emilia Pardo Bazán,1908,1900,cuento,es,,1329,8,60.2,1,7.52,1,7.52,2,15.05,6,45.15,0,0.0,1,7.52
+la_senorita_aglae__cuento_001,la_senorita_aglae,cuento_001,cuento,La Señorita Aglae,Emilia Pardo Bazán,1922,1920,cuento,es,,1627,12,73.76,0,0.0,8,49.17,0,0.0,7,43.02,0,0.0,3,18.44
+las_caras__cuento_001,las_caras,cuento_001,cuento,Las Caras,Emilia Pardo Bazán,1910,1910,cuento,es,,1464,5,34.15,2,13.66,1,6.83,2,13.66,3,20.49,1,6.83,1,6.83
+las_cutres__cuento_001,las_cutres,cuento_001,cuento,"Las ""Cutres""",Emilia Pardo Bazán,1910,1910,cuento,es,,1429,4,27.99,0,0.0,0,0.0,1,7.0,6,41.99,6,41.99,1,7.0
+las_tapias_del_campo_santo__cuento_001,las_tapias_del_campo_santo,cuento_001,cuento,Las Tapias del Campo Santo,Emilia Pardo Bazán,1892,1890,cuento,es,,3416,2,5.85,0,0.0,2,5.85,2,5.85,9,26.35,5,14.64,3,8.78
+madrugueiro__cuento_001,madrugueiro,cuento_001,cuento,Madrugueiro,Emilia Pardo Bazán,1922,1920,cuento,es,,1543,12,77.77,1,6.48,6,38.89,0,0.0,18,116.66,0,0.0,1,6.48
+manuel_antonio_de_catro_a_catro_tei__poesia_001,manuel_antonio_de_catro_a_catro_tei,poesia_001,poesia,De catro a catro,Manuel Antonio,1940,1940,poesia,gl,A Coruña,5386,0,0.0,13,24.14,13,24.14,0,0.0,13,24.14,0,0.0,1,1.86
+morrion_y_boina__cuento_001,morrion_y_boina,cuento_001,cuento,Morrión y Boina,Emilia Pardo Bazán,1892,1890,cuento,es,,9209,81,87.96,13,14.12,2,2.17,5,5.43,33,35.83,1,1.09,13,14.12
+nieto_del_cid__cuento_001,nieto_del_cid,cuento_001,cuento,Nieto del Cid,Emilia Pardo Bazán,1900,1900,cuento,es,,2833,59,208.26,1,3.53,0,0.0,13,45.89,7,24.71,1,3.53,9,31.77
+poema_humilde__poesia_001,poema_humilde,poesia_001,poesia,Poema Humilde,Emilia Pardo Bazán,1900,1900,poesia,es,,1656,4,24.15,4,24.15,5,30.19,3,18.12,11,66.43,2,12.08,1,6.04
+por_el_arte__cuento_001,por_el_arte,cuento_001,cuento,Por el Arte,Emilia Pardo Bazán,1891,1890,cuento,es,,9388,11,11.72,3,3.2,3,3.2,4,4.26,22,23.43,1,1.07,4,4.26
+punteria__cuento_001,punteria,cuento_001,cuento,Puntería,Emilia Pardo Bazán,1892,1890,cuento,es,,1794,1,5.57,0,0.0,4,22.3,3,16.72,4,22.3,1,5.57,6,33.44
+queixumes_dos_pinos__poesia_001,queixumes_dos_pinos,poesia_001,poesia,Queixumes dos pinos,Eduardo Pondal,1886,1880,poesia,gl,Galicia,37497,24,6.4,6,1.6,21,5.6,3,0.8,154,41.07,20,5.33,6,1.6
+retrincos__cuento_001,retrincos,cuento_001,cuento,Retrincos,Alfonso Daniel Rodriguez Castelao,1934,1930,cuento,gl,Galicia,6551,13,19.84,6,9.16,21,32.06,10,15.26,25,38.16,0,0.0,2,3.05
+romance_de_lobos__sec_001,romance_de_lobos,sec_001,seccion,Romance de lobos,Ramón del Valle-Inclán,1908,1900,teatro,es,,617,2,32.41,2,32.41,1,16.21,0,0.0,3,48.62,0,0.0,6,97.24
+santiago_el_mudo__cuento_001,santiago_el_mudo,cuento_001,cuento,Santiago el Mudo,Emilia Pardo Bazán,1894,1890,cuento,es,,1788,22,123.04,0,0.0,6,33.56,2,11.19,10,55.93,2,11.19,1,5.59
+sempre_en_galiza_castelao_tei__unidad_001,sempre_en_galiza_castelao_tei,unidad_001,unidad_unica,Sempre en Galiza,Alfonso Daniel Rodriguez Castelao,1944,1940,ensayo,gl,Buenos Aires,166148,309,18.6,90,5.42,179,10.77,77,4.63,529,31.84,248,14.93,57,3.43
+supersticiones_de_galicia_y_preocupaciones_vulgares_tei__unidad_001,supersticiones_de_galicia_y_preocupaciones_vulgares_tei,unidad_001,unidad_unica,Supersticiones de Galicia y preocupaciones vulgares,Xesús Rodríguez López,1943,1940,ensayo,es,Buenos Aires,55644,195,35.04,35,6.29,14,2.52,62,11.14,105,18.87,51,9.17,95,17.07
+testigo_irrecusable__cuento_001,testigo_irrecusable,cuento_001,cuento,Testigo Irrecusable,Emilia Pardo Bazán,1917,1910,cuento,es,,1695,6,35.4,1,5.9,1,5.9,0,0.0,3,17.7,0,0.0,1,5.9
+una_pasion__cuento_001,una_pasion,cuento_001,cuento,Una Pasión,Emilia Pardo Bazán,1909,1900,cuento,es,,3345,19,56.8,3,8.97,0,0.0,6,17.94,15,44.84,6,17.94,0,0.0
+viernes_santo__cuento_001,viernes_santo,cuento_001,cuento,Viernes Santo,Emilia Pardo Bazán,1891,1890,cuento,es,,4091,33,80.66,1,2.44,1,2.44,2,4.89,26,63.55,4,9.78,14,34.22

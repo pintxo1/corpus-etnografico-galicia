@@ -1,0 +1,32 @@
+# Corpus Etnográfico Galicia - Dependencias Python
+# Python 3.10+
+
+# Core Data Science
+pandas>=2.0.0
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Visualización
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Procesamiento TEI/XML
+lxml>=4.9.0
+
+# Machine Learning (básico)
+scikit-learn>=1.2.0
+
+# Análisis de Redes (nuevo)
+networkx>=3.0
+
+# Mapas Interactivos (nuevo)
+folium>=0.14.0
+
+# Georreferenciación (opcional - requiere GDAL)
+# geopandas>=0.13.0
+
+# NLP (opcional - si se añade análisis de entidades)
+# spacy>=3.5.0
+
+# Utilidades
+tqdm>=4.65.0

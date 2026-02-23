@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Outputs (regenerables)
+outputs/metricas_etnograficas/*.csv
+outputs/coocurrencias/*.csv
+outputs/redes_sociales/*
+outputs/mapas/*
+outputs/figuras_paper/*.png
+outputs/figuras_paper/*.pdf
+
+# Mantener estructura de carpetas
+!outputs/metricas_etnograficas/.gitkeep
+!outputs/coocurrencias/.gitkeep
+!outputs/redes_sociales/.gitkeep
+!outputs/mapas/.gitkeep
+!outputs/figuras_paper/.gitkeep
+
+# Datasets históricos (pueden ser grandes o privados)
+datasets_historicos/*.csv
+datasets_historicos/*.xlsx
+!datasets_historicos/README_fuentes.md
+
+# Logs
+*.log
+nohup.out
+
+# Temporal
+tmp/
+temp/
+.cache/
