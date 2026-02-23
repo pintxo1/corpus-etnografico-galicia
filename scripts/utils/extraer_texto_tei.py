@@ -14,9 +14,8 @@ from pathlib import Path
 from typing import List, Dict, Optional
 from lxml import etree
 
-# Importar configuración
-sys.path.insert(0, str(Path(__file__).parent))
-from config_categorias import TEI_NAMESPACE, CONFIG_ANALISIS
+# TEI namespace (estándar)
+TEI_NAMESPACE = {'tei': 'http://www.tei-c.org/ns/1.0'}
 
 
 def extraer_texto_tei(tei_file: Path, 
