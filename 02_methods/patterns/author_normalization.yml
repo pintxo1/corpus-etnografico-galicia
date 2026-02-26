@@ -1,0 +1,33 @@
+# Reglas de normalización de autores
+# Formato: author_raw -> author_normalized (forma canónica)
+
+author_mappings:
+  # Castelao (3 variantes en TEI -> 1 canonizado)
+  "Alfonso R. Castelao": "Castelao, Alfonso Rodríguez"
+  "Afonso Rodríguez Castelao": "Castelao, Alfonso Rodríguez"
+  "Alfonso Daniel Rodríguez Castelao": "Castelao, Alfonso Rodríguez"
+  
+  # Pardo Bazán
+  "Emilia Pardo Bazán": "Pardo Bazán, Emilia"
+  
+  # Valle-Inclán
+  "Ramón del Valle-Inclán": "Valle-Inclán, Ramón del"
+  "Ramón María del Valle-Inclán": "Valle-Inclán, Ramón del"
+  
+  # Rosalía de Castro
+  "Rosalía de Castro": "Castro, Rosalía de"
+  
+  # Otros autores
+  "Rafael Dieste": "Dieste, Rafael"
+  "Manuel Curros Enríquez": "Curros Enríquez, Manuel"
+  "Eduardo Pondal": "Pondal, Eduardo"
+  "Manuel Antonio": "Antonio, Manuel"
+  "Rodríguez López, Xesús, 1859-1917": "Rodríguez López, Xesús"
+  
+  # Catálogo abierto a más reglas
+  # Agregar nueva línea si surge nuevo autor
+
+# Notas:
+# - Patrón: "Last, First" para coherencia
+# - Si author_raw no está en mapeo: se mantiene como está (sin normalizar)
+# - Si author_raw = NULL/missing: author_normalized = NULL

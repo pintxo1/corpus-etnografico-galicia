@@ -1,0 +1,6 @@
+# Reglas de muestreo (ajuste minimo por sobrerrepresentacion)
+# Nota: min_per_escena=10 es viable con el volumen actual de casos.
+
+n_total: 80
+max_per_obra: 6
+min_per_escena: 10

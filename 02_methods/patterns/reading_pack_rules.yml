@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# reading_pack_rules.yml - Configuración de estratificación para reading pack
+
+# DIVERSIDAD DE OBRAS (NEW)
+# Objetivo: representar el corpus a escala (81 obras total)
+min_unique_obras: 40
+reserve_percent_for_diversity: 0.25   # 25% dedicado a ampliar cobertura de obras
+
+# Tamaño total de la muestra
+n_total: 180
+
+# Restricción por obra: máximo N casos de una sola obra
+max_per_obra: 6
+
+# Restricción por escena: mínimo N casos por tipo de escena
+# Bajado a 6 para dar margen a diversidad de obras
+min_per_escena: 6
+
+# Inclusión de casos de baja saliencia pero alta cobertura
+# Reservar 10-15% del total para casos que:
+# - Provienen de obras con muy pocos casos en esa escena (alta cobertura)
+# - Pero alto riesgo de concentración (baja saliencia por frecuencia)
+# Esto evita sobrerrepresentación de obras frecuentes
+include_negative_cases: true
+negative_case_pct_min: 10
+negative_case_pct_max: 15
+
+# Balance por cluster (si existe clusters_k4.csv)
+# "auto": si existe clusters_k4.csv, respetar distribución de clusters
+# "skip": ignorar clusters completamente
+balance_by_cluster: auto
+
+# Priorización:
+# "salience_then_coverage": priorizar z-score alto, después diversidad de obras
+# "coverage_then_salience": priorizar que todas las obras estén representadas
+prioritization: salience_then_coverage

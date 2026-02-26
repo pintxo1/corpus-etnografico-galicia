@@ -1,0 +1,175 @@
+# escenas_minimas.yml - Patrones regex para detección de escenas etnográficas
+#
+# Versión: 1.0
+# Proyecto: Etnografía Digital Gallega
+#
+# FILOSOFÍA:
+# Estos patrones NO son "variables independientes" para medir.
+# Son HEURÍSTICAS para encontrar escenas textuales densas que merezcan lectura etnográfica.
+# Un match no es "evidencia" de realidad social, sino ARTEFACTO TEXTUAL situado.
+
+# ESTRUCTURA:
+# cada patrón tiene:
+#   - id: identificador único (slug)
+#   - nombre: nombre legible
+#   - descripción: qué busca (y qué NO busca)
+#   - regex: patrón (case-insensitive, Spanish orthography variations)
+#   - ventana: tokens de contexto (default: 80)
+
+---
+
+# ========================================
+# MOVILIDAD Y MIGRACIÓN
+# ========================================
+
+migracion_embarque:
+  nombre: "Escena de embarque/partida migratoria"
+  descripcion: >
+    Busca escenas donde alguien parte hacia América/ultramar.
+    NO asume que toda mención de "embarcar" sea migración económica.
+    Atentos a: ¿Quién parte? ¿Con qué tono? ¿Épico, melancólico, irónico?
+  regex: '\b(embarc(ar|ou|ado|aba)|partir.*América|ir.*ultramar|marcharse.*Indias|emigr(ar|ante)|salir.*Buenos Aires)\b'
+  ventana: 100
+  
+retorno_indiano:
+  nombre: "Retorno de indiano/americano"
+  descripcion: >
+    Escena de retorno de emigrado enriquecido.
+    Atentos a: ¿Fantasía de retorno vs. realidad? ¿Quién retorna (hombre/mujer)?
+    ¿Cómo se narra el enriquecimiento (legítimo/ilegítimo)?
+  regex: '\b(volver.*América|retorn(ar|o).*indiano|americ(a)?no.*rico|fortuna.*ultramar|indianos?|regres(ar|o).*Buenos Aires)\b'
+  ventana: 100
+
+herencia_tierra:
+  nombre: "Conflictos de herencia/propiedad"
+  descripcion: >
+    Escena donde se disputa herencia, tierras, casas.
+    Atentos a: ¿Quiénes heredan (hijos/hijas)? ¿Primogenitura vs. reparto?
+    ¿Violencia asociada a herencia?
+  regex: '\b(herencia|heredar|testament(o|ar)|mayorazg(o|a)|reparto.*tierras?|propiedad.*disputar?|foro|rentero)\b'
+  ventana: 80
+
+# ========================================
+# SUBSISTENCIA Y TRABAJO
+# ========================================
+
+hambre_subsistencia:
+  nombre: "Hambre, escasez, crisis de subsistencia"
+  descripcion: >
+    Escena de hambre, carestía, crisis agraria.
+    Atentos a: ¿Hambre como realidad vs. metáfora? ¿Quiénes sufren hambre (campesinos/jornaleros)?
+  regex: '\b(hambre|hambri(ento|enta)|carestía|escasez|miseria|pobreza|mendigar?|limosna|pan.*faltar)\b'
+  ventana: 80
+
+trabajo_jornalero:
+  nombre: "Trabajo asalariado/jornalero"
+  descripcion: >
+    Escena de jornaleros, criados, trabajo asalariado.
+    Atentos a: ¿Relación patrón-jornalero? ¿Salarios? ¿Conflictos laborales?
+  regex: '\b(jornal(ero|era)?|criado|criada|asalariado|trabaj(ar|o).*campo|segador|segar|vendimia|guarda|sirviente)\b'
+  ventana: 80
+
+deuda_usura:
+  nombre: "Endeudamiento y usura"
+  descripcion: >
+    Escena de deudas, prestamistas, usura.
+    Atentos a: ¿Quién se endeuda (hombre/mujer)? ¿Qué tipo de deuda (dote, tierras, consumo)?
+  regex: '\b(deuda|deber.*dinero|préstamo|prestamista|usur(a|ero)|empeñ(ar|o)|embarg(ar|o)|hipoteca)\b'
+  ventana: 80
+
+# ========================================
+# ESTRUCTURA SOCIAL Y GÉNERO
+# ========================================
+
+caciquismo_poder:
+  nombre: "Caciquismo, clientelismo, poder local"
+  descripcion: >
+    Escena donde aparece cacique, cura, autoridad local ejerciendo poder.
+    Atentos a: ¿Cómo se representa el cacique (tirano/paternalista)? ¿Violencia política?
+  regex: '\b(cacique|amo.*tierras|señorito|autoridad|alcalde.*arbitrar|cura.*poder|párroco.*mandar|elecciones?|votar)\b'
+  ventana: 100
+
+violencia_agresion:
+  nombre: "Violencia física, agresiones"
+  descripcion: >
+    Escena de violencia explícita (golpes, asesinato, violación).
+    Atentos a: ¿Quién ejerce violencia (hombre/mujer)? ¿Legitimada o condenada?
+  regex: '\b(golpe(ar|s)?|pegar|maltratar|her(ir|ida)|matar|asesinar?|violencia|agr(ed|esión)|ultraj(ar|e)|violar|forzar)\b'
+  ventana: 100
+
+genero_roles:
+  nombre: "Roles de género, trabajo femenino, maternidad"
+  descripcion: >
+    Escena donde se narran roles de género, trabajo doméstico, maternidad.
+    Atentos a: ¿Cómo se representa trabajo femenino (invisibilizado/valorado)?
+    ¿Maternidad como destino vs. carga?
+  regex: '\b(mujer.*trabaj(ar|o)|coser|hilar|lavar|cocinar|cuidar.*niños|parir|parto|madre.*sufrir|dote|casarse)\b'
+  ventana: 80
+
+# ========================================
+# CICLO VITAL Y RELIGIOSIDAD
+# ========================================
+
+muerte_duelo:
+  nombre: "Muerte, entierro, duelo"
+  descripcion: >
+    Escena de muerte, entierro, rituales fúnebres.
+    Atentos a: ¿Cómo se narra la muerte (natural/violenta)? ¿Duelo femenino vs. masculino?
+  regex: '\b(mor(ir|irse)|muerte|muerto|entierro|enterrar|funeral|duelo|luto|ataúd|cadáver|difunto|cementerio)\b'
+  ventana: 100
+
+religiosidad_supersticion:
+  nombre: "Religiosidad popular, supersticiones"
+  descripcion: >
+    Escena de prácticas religiosas, supersticiones, brujería.
+    Atentos a: ¿Religión oficial vs. popular? ¿Mujeres como mediadoras (curanderas, brujas)?
+  regex: '\b(romer(ía|o)|milagro|santo|virgen|procesión|bruj(a|ería)|curand(ero|era)|ag(o|üero)|maldici(ón|ó)n|sortil(egio|exio))\b'
+  ventana: 80
+
+ciclo_agricola:
+  nombre: "Ciclo agrícola, siembra, cosecha"
+  descripcion: >
+    Escena de trabajo agrícola estacional.
+    Atentos a: ¿Quiénes trabajan? ¿Cómo se narra el trabajo (bucólico/duro)?
+  regex: '\b(sembra(r|dura)|cosecha|vendimia|segar|trilla|arado|labrar.*tierra|cosechar|grano|maíz|vin(o|a))\b'
+  ventana: 80
+
+# ========================================
+# ESPACIO Y MOVILIDAD INTERNA
+# ========================================
+
+aldea_ciudad:
+  nombre: "Aldea vs. ciudad, contraste rural-urbano"
+  descripcion: >
+    Escena donde se contrasta aldea y ciudad.
+    Atentos a: ¿Cómo se valora cada espacio (aldea=auténtica vs. ciudad=corruptora)?
+  regex: '\b(aldea|pueblo|vila|ciudad|urbe|capital|campo.*ciudad|rural.*urbano|marcharse.*ciudad|volver.*aldea)\b'
+  ventana: 80
+
+movilidad_interna:
+  nombre: "Movilidad interna (Galicia-Castilla, ciudad-aldea)"
+  descripcion: >
+    Escena de movilidad interna (temporera, definitiva).
+    Atentos a: ¿Destinos (Castilla, Portugal, otra aldea)? ¿Motivos (trabajo, familia)?
+  regex: '\b(ir.*Castilla|marchar.*siega|temporada.*fuera|ir.*cidade|mudarse|trasladarse|viaxe|camiño)\b'
+  ventana: 80
+
+# ========================================
+# AFECTIVIDAD Y EMOCIONES
+# ========================================
+
+morriña_nostalgia:
+  nombre: "Morriña, nostalgia, añoranza"
+  descripcion: >
+    Escena de morriña, nostalgia de la tierra.
+    Atentos a: ¿Quién siente morriña (emigrado/exiliado)? ¿Tono (melancólico/irónico)?
+  regex: '\b(morriña|s(o)?edad|nostalgia|añoranza|echar.*menos|acordarse.*tierra|soc(g|h)eganza|pensar.*aldea)\b'
+  ventana: 80
+
+amor_deseo:
+  nombre: "Amor, deseo, relaciones afectivas"
+  descripcion: >
+    Escena de amor, deseo, relaciones románticas/sexuales.
+    Atentos a: ¿Cómo se narra el deseo (legitimado/condenado)? ¿Amor vs. arreglo matrimonial?
+  regex: '\b(amor|enamorar(se)?|querer|desear?|beso|abrazo|car(iño|icia)|pasión|amante|novio|galanteo)\b'
+  ventana: 80

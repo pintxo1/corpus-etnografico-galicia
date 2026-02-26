@@ -1,0 +1,14 @@
+# Schema minimo para RULES (muestreo estratificado)
+# Todos los valores son enteros; cualquier clave puede omitirse.
+# Si no se pasa RULES, el muestreo se comporta como hasta ahora.
+
+# max_per_obra: limite maximo de casos por obra
+# min_per_escena: minimo por escena (si hay suficientes casos)
+# n_total: total de casos a muestrear
+# n_per_cluster: casos por cluster_k4 (si existe)
+
+# Ejemplo:
+# max_per_obra: 5
+# min_per_escena: 2
+# n_total: 80
+# n_per_cluster: 10

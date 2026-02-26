@@ -24,31 +24,58 @@ ENV/
 .DS_Store
 Thumbs.db
 
-# Outputs (regenerables)
-outputs/metricas_etnograficas/*.csv
-outputs/coocurrencias/*.csv
-outputs/redes_sociales/*
-outputs/mapas/*
-outputs/figuras_paper/*.png
-outputs/figuras_paper/*.pdf
+#==============================================================================
+# PROJECT STRUCTURE - What to ignore vs. keep
+#==============================================================================
 
-# Mantener estructura de carpetas
-!outputs/metricas_etnograficas/.gitkeep
-!outputs/coocurrencias/.gitkeep
-!outputs/redes_sociales/.gitkeep
-!outputs/mapas/.gitkeep
-!outputs/figuras_paper/.gitkeep
+# 01_data: Ignore generated/regenerable files, keep documentation
+01_data/tei/source/*.xml
+01_data/tei/source/*.tei.xml
+01_data/tei/derived/*
+01_data/text/*
+01_data/kwic_exports/*
 
-# Datasets históricos (pueden ser grandes o privados)
-datasets_historicos/*.csv
-datasets_historicos/*.xlsx
+# BUT keep documentation in data directories
+!01_data/README*.md
+!01_data/tei/source/MANIFEST.md
+!01_data/tei/sample/
+!01_data/external/
+
+# 03_analysis: Ignore regenerable cases and packs, keep ethnographic writing
+03_analysis/cases/
+03_analysis/reading_pack/
+
+# BUT keep memos directory (ethnographic writing)
+!03_analysis/memos/
+
+# 04_outputs: All regenerable (complete ignore)
+04_outputs/
+!04_outputs/README.md
+
+# 05_freeze: Keep only versioned freezes
+05_freeze/*
+!05_freeze/README.md
+!05_freeze/*-lite/
+!05_freeze/*-lite/**
+
+# Legacy/archive (completely ignore)
+99_archive/
+legacy/
+old_scripts/
+
+# Old structure (legacy)
+outputs/
+datasets_historicos/
 !datasets_historicos/README_fuentes.md
+scripts/
+data/
+diccionarios/
 
-# Logs
+# Logs and temporals
 *.log
 nohup.out
-
-# Temporal
 tmp/
 temp/
 .cache/
+
+99_archive/

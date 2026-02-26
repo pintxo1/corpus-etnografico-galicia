@@ -1,0 +1,180 @@
+# Marcadores Migratorios para Análisis de Representación del Emigrante
+# Lexicón controlado de 40 contextos KWIC
+# Aplicable a corpus narrativo gallego (XIX-XX)
+
+markers:
+  # Profesionales & Negocios de Emigrante
+  - marker: "indiano"
+    pos_tags: ["NN", "ADJ"]
+    context: "persona que hizo fortuna en América"
+    example: "un indiano \\w+ volvía"
+    
+  - marker: "emigrante"
+    pos_tags: ["NN", "ADJ"]
+    context: "persona que emigra/emigró"
+    
+  - marker: "americano"
+    pos_tags: ["NN", "ADJ"]
+    context: "de/en América o que residió allí"
+    
+  # Rutas & Geografías
+  - marker: "para\\s+América|rumbo\\s+a\\s+América"
+    pos_tags: ["PP", "NN"]
+    context: "partida hacia continente americano"
+    
+  - marker: "Buenos Aires"
+    pos_tags: ["NNP", "NNP"]
+    context: "capital rioplatense; centro de inmigración"
+    frequency: "HIGH"
+    
+  - marker: "Habana|Cuba"
+    pos_tags: ["NNP"]
+    context: "colonia española; destino migratorio"
+    
+  - marker: "Montevideo"
+    pos_tags: ["NNP"]
+    context: "puerto rioplatense"
+    
+  - marker: "ultramar"
+    pos_tags: ["NN", "ADV"]
+    context: "más allá del océano; territorios coloniales"
+    
+  - marker: "ultramarino"
+    pos_tags: ["NN", "ADJ"]
+    context: "comerciante/productos de ultramar"
+    
+  # Viaje & Atravesía
+  - marker: "travesía"
+    pos_tags: ["NN"]
+    context: "travesía atlántica; cruzar océano"
+    
+  - marker: "buque|barco|vapor"
+    pos_tags: ["NN"]
+    context: "transporte trasatlántico"
+    
+  - marker: "puerto"
+    pos_tags: ["NN"]
+    context: "embarque/desembarque"
+    
+  - marker: "pasaje"
+    pos_tags: ["NN"]
+    context: "billete de travesía; precio del viaje"
+    
+  # Experiencia & Transformación
+  - marker: "hacer las Américas"
+    pos_tags: ["VB", "NN"]
+    context: "enriquecerse; prosperar; aventura emigratoria"
+    frequency: "VERY_HIGH"
+    
+  - marker: "fortunas de guerra"
+    pos_tags: ["NN", "NN"]
+    context: "cambios de suerte; éxito/fracaso en América"
+    
+  - marker: "sucesos de vida"
+    pos_tags: ["NN", "NN"]
+    context: "aventuras; hados del emigrante"
+    
+  - marker: "fortuna"
+    pos_tags: ["NN"]
+    context: "riqueza; suerte; destino (en contexto migratorio)"
+    colocation: ["hizo", "amassó", "ganó"]
+    
+  - marker: "riqueza"
+    pos_tags: ["NN"]
+    context: "prosperidad (en contexto emigrante/colonial)"
+    
+  # Añoranza & Distancia
+  - marker: "nostalgia|saudade|morriña"
+    pos_tags: ["NN"]
+    context: "añoranza de tierra natal"
+    
+  - marker: "desterrado|exiliado|proscrito"
+    pos_tags: ["NN", "ADJ"]
+    context: "separación forzada o voluntaria de patria"
+    
+  - marker: "lejanía"
+    pos_tags: ["NN"]
+    context: "distancia física/emocional de origen"
+    
+  - marker: "retorno"
+    pos_tags: ["NN", "VB"]
+    context: "regreso; volver a Galicia"
+    
+  # Comercio & Economía Colonial
+  - marker: "azúcar|cacao|tabaco"
+    pos_tags: ["NN"]
+    context: "productos coloniales; comercio de trata"
+    
+  - marker: "hacendado|plantación"
+    pos_tags: ["NN"]
+    context: "propietario colonial; propiedad en América"
+    
+  - marker: "comercio de Indias|tráfico colonial"
+    pos_tags: ["NN"]
+    context: "sistema comercial España-Ultramar"
+    
+  - marker: "monopolio"
+    pos_tags: ["NN"]
+    context: "control colonial; privilegios comerciales"
+    
+  # Estatus & Poder
+  - marker: "palacio|mansión|quinta|estancia"
+    pos_tags: ["NN"]
+    context: "vivienda de rico/indiano; lujos de emigrante"
+    
+  - marker: "títulos de nobleza|grandeza"
+    pos_tags: ["NN"]
+    context: "ascenso social en América; ennoblecer"
+    
+  - marker: "criados|esclavos|peones"
+    pos_tags: ["NN"]
+    context: "servidumbre; jerarquía de plantación"
+    
+  # Identidad & Pertenencia
+  - marker: "gallego|español|europeo"
+    pos_tags: ["NN", "ADJ"]
+    context: "identidad de origen; extranjero en América"
+    
+  - marker: "paisano|compatriota"
+    pos_tags: ["NN"]
+    context: "comunidad de emigrantes del mismo origen"
+    
+  - marker: "colonia|comunidad de emigrados"
+    pos_tags: ["NN"]
+    context: "asentamientos europeos en ultramar"
+    
+  # Desolación & Fracaso
+  - marker: "pobreza|miseria|indigencia"
+    pos_tags: ["NN"]
+    context: "fracaso económico; emigrante arruinado"
+    
+  - marker: "prisión|cautividad|esclavitud"
+    pos_tags: ["NN"]
+    context: "capturas; trata; servidumbre en ultramar"
+    
+  - marker: "muerte en tierra ajena"
+    pos_tags: ["NN"]
+    context: "perish abroad; suerte trágica de emigrante"
+
+# Reglas de extracción KWIC
+kwic_parameters:
+  window_left: 6    # palabras izquierda del marcador
+  window_right: 6   # palabras derecha del marcador
+  case_sensitive: false
+  regex_enabled: true
+  
+# Estrategia de densidad
+density_target:
+  unit: "per_1000_tokens"
+  high: 5+
+  medium: 2-4
+  low: 0-1
+  none: 0
+
+# Notas metodológicas
+notes: |
+  - Marcadores seleccionados para máxima cobertura narrativa XIX-XX
+  - NO incluye marcadores de "pobreza urbana" (desconocida en contexto colonial)
+  - Privilegia: viaje, comercio colonial, transformación identitaria, nostalgia
+  - Aplicable a corpus narrativo, epistolar, ensayístico
+  - Per-obra density report → identificar obras de "emigrant-lite" (baja densidad pero presente)

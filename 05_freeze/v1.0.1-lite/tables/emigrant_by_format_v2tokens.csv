@@ -1,0 +1,5 @@
+format,n_obras,tokens_total,n_emigrant_mentions,emigrant_rate_per_1k_tokens,top_markers
+unknown,74,673688,1704,2.53,
+poesía,3,62415,113,1.81,
+crónica,1,19221,22,1.14,
+novela,2,263096,262,1.0,
