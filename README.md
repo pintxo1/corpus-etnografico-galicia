@@ -5,6 +5,8 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/status-experimental-orange.svg)]()
+[![Software DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18847851-blue.svg)](https://doi.org/10.5281/zenodo.18847851)
+[![Dataset DOI](https://img.shields.io/badge/Dataset_DOI-10.5281%2Fzenodo.18847745-blue.svg)](https://doi.org/10.5281/zenodo.18847745)
 
 Etnografía digital reflexiva que **sitúa** la literatura gallega (1860-1950) como **producción de imaginario** sobre migración, arraigo y movilidad. No buscamos "reflejar" realidad ni "medir" contexto social, sino **mapear repertorios narrativos**, identificar **disonancias** entre géneros/autores/décadas, y establecer **contrapuntos** con archivos históricos para iluminar las condiciones de producción del discurso migratorio.
 
@@ -504,6 +506,20 @@ No se asume ningún repositorio externo: el archivo TEI es un **archivo situado*
 
 ---
 
+## 📚 Cómo citar
+
+Referencia recomendada del software:
+
+Martínez Pérez, D. (2026). *Etnografía Digital Gallega — Literatura como Artefacto Cultural (1860-1950)* (v1.0.0) [Código fuente]. Zenodo. https://doi.org/10.5281/zenodo.18847851
+
+Referencia recomendada del dataset:
+
+Martínez Pérez, D. (2026). *Etnografía Digital Gallega — Dataset del proyecto Etnografía Digital Gallega — Literatura como Artefacto Cultural (1860-1950)* [Conjunto de datos]. Zenodo. https://doi.org/10.5281/zenodo.18847745
+
+Repositorio GitHub del código: https://github.com/pintxo1/corpus-etnografico-galicia
+
+---
+
 ## 📄 Licencia
 
 MIT License - Ver [LICENSE](LICENSE)
@@ -541,9 +557,13 @@ MIT License - Ver [LICENSE](LICENSE)
 
 ## 💬 Contacto y Contribuciones
 
-**Autor:** Daniel Martinez Perez  
+**Autor:** Daniel Martínez Pérez  
+**Afiliación:** Departamento de Antropología Social y Cultural (UNED), España  
+**ORCID:** https://orcid.org/0000-0001-9366-8752  
 **Email:** dmartinez@fsof.uned.es  
 **GitHub:** [@pintxo1](https://github.com/pintxo1)
+
+**Contexto académico:** Investigación vinculada a tesis doctoral (sin financiación de proyecto específica).
 
 **Contribuciones**: Bienvenidas vía issues/PRs. Este es un proyecto experimental y abierto a crítica metodológica.
 
