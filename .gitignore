@@ -1,81 +1,141 @@
-# Python
+#==============================================================================
+# PYTHON & VIRTUAL ENVIRONMENTS
+#==============================================================================
+
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+
+# Virtual environments
 venv/
 env/
 ENV/
 .venv/
 
-# Jupyter Notebooks
-.ipynb_checkpoints/
-*.ipynb
+#==============================================================================
+# IDE & EDITORS
+#==============================================================================
 
-# IDEs
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
-# OS
+#==============================================================================
+# OPERATING SYSTEM FILES
+#==============================================================================
+
 .DS_Store
+.AppleDouble
+__MACOSX/
 Thumbs.db
+.Spotlight-V100
+.Trashes
 
 #==============================================================================
-# PROJECT STRUCTURE - What to ignore vs. keep
+# JUPYTER & NOTEBOOKS
 #==============================================================================
 
-# 01_data: Ignore generated/regenerable files, keep documentation
+.ipynb_checkpoints/
+*.ipynb
+
+#==============================================================================
+# R / STATISTICS
+#==============================================================================
+
+.Rhistory
+.RData
+renv/
+renv.lock
+.Renviron
+
+#==============================================================================
+# LARGE DATA (regenerable from TEI source)
+#==============================================================================
+
+# KWIC exports (370 MB - regenerable)
+01_data/kwic_exports/
+
+# Full text plaintext exports (regenerable)
+01_data/text/
+
+# Large intermediate analysis tables (regenerable from source)
+04_outputs/tables/*.csv
+!04_outputs/tables/corpus_master_table_v2tokens.csv
+!04_outputs/tables/emigrant_by_*.csv
+!04_outputs/tables/token_mismatch_audit.csv
+
+#==============================================================================
+# DEPLOYMENT ARTIFACTS (local-only, not source)
+#==============================================================================
+
+# Zenodo deposit package (upload to Zenodo, don't version code)
+zenodo/
+ZENODO_PACKAGE_SUMMARY.md
+
+#==============================================================================
+# PROJECT STRUCTURE - What to KEEP for reproducibility
+#==============================================================================
+
+# 01_data: Keep sample, exclude full corpus & regenerable files
 01_data/tei/source/*.xml
 01_data/tei/source/*.tei.xml
 01_data/tei/derived/*
-01_data/text/*
-01_data/kwic_exports/*
-
-# BUT keep documentation in data directories
-!01_data/README*.md
-!01_data/tei/source/MANIFEST.md
 !01_data/tei/sample/
-!01_data/external/
+!01_data/README*.md
 
-# 03_analysis: Ignore regenerable cases and packs, keep ethnographic writing
+# 02_methods: KEEP ALL (scripts, config, lexicons)
+# No exclusions here - all content should be in GitHub
+
+# 03_analysis: Ignore regenerable analysis, keep ethnographic writing
 03_analysis/cases/
 03_analysis/reading_pack/
-
-# BUT keep memos directory (ethnographic writing)
 !03_analysis/memos/
+!03_analysis/README*.md
 
-# 04_outputs: All regenerable (complete ignore)
-04_outputs/
-!04_outputs/README.md
+# 04_outputs: Keep ONLY case studies & key metadata, ignore intermediate tables
+04_outputs/case_cards/
+04_outputs/figures/
+!04_outputs/tables/corpus_master_table_v2tokens.csv
+!04_outputs/tables/emigrant_by_*.csv
+!04_outputs/tables/token_mismatch_audit.csv
+!04_outputs/README*.md
 
-# 05_freeze: Keep only versioned freezes
+# 05_freeze: KEEP versioned freeze deliverables
 05_freeze/*
 !05_freeze/README.md
 !05_freeze/*-lite/
 !05_freeze/*-lite/**
 
-# Legacy/archive (completely ignore)
+# 00_docs: KEEP ALL
+# No exclusions - all documentation in GitHub
+
+#==============================================================================
+# LEGACY & ARCHIVE
+#==============================================================================
+
 99_archive/
 legacy/
 old_scripts/
-
-# Old structure (legacy)
 outputs/
 datasets_historicos/
-!datasets_historicos/README_fuentes.md
-scripts/
-data/
 diccionarios/
 
-# Logs and temporals
+#==============================================================================
+# TEMPORARY & LOG FILES
+#==============================================================================
+
 *.log
 nohup.out
 tmp/
 temp/
 .cache/
-
-99_archive/
+.env

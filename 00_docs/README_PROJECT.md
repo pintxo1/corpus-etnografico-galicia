@@ -80,7 +80,10 @@ make evidence-pack-emigrante-v2tokens  # Resumen emigrante con v2tokens
 #   04_outputs/tables/emigrant_by_{author,decade,format}_v2tokens.csv
 #   04_outputs/reports/EVIDENCE_PACK_EMIGRANTE_v2tokens.md
 #   04_outputs/figures/static/fig_emigrant_*.{png,pdf}
+#   03_analysis/reading_pack/emigrante_representation_pack_v2.csv (180 casos)
 ```
+
+**Documentación:** Ver [PACK_V2_METHOD.md](PACK_V2_METHOD.md) para detalles sobre la estrategia de selección del reading pack emigrante.
 
 ### Paso 5: Congelar Artefactos (Freeze-lite)
 
@@ -99,6 +102,8 @@ make freeze-lite
 #     ├── manifests/
 #     └── FREEZE_NOTES.md
 ```
+
+**Documentación:** Ver [FREEZE_LITE.md](FREEZE_LITE.md) para detalles sobre estructura, integridad SHA256, y uso en paper.
 
 ### Paso 6: Limpiar (si necesario reiniciar)
 
@@ -132,6 +137,11 @@ make report-summary
 
 - **`make tei-metadata`** — Extrae metadata de autores (con normalización)
   - Genera: 04_outputs/tables/works_metadata_from_tei.csv
+
+- **`make tei-genre`** — Extrae género/formato desde TEI headers (Phase 12B)
+  - Genera: 04_outputs/tables/work_genre_from_tei.csv
+  - QA Report: 00_docs/GENRE_QA_REPORT.md
+  - Nuevo: elimina "unknown" dominante en emigrant_by_format
 
 - **`make build-cases`** — Detecta casos/escenas (regex KWIC)
   - Genera: 01_data/kwic_exports/cases_raw.csv
@@ -179,8 +189,14 @@ make report-summary
   - Genera: EVIDENCE_PACK_EMIGRANTE.md + 180 tarjetas de anotación
 
 - **`make evidence-pack-emigrante-v2tokens`** (NUEVO) — Evidence pack con denominadores fulltext
-  - Deps: fix-tokens-full (ya incluido)
-  - Genera: EVIDENCE_PACK_EMIGRANTE_v2tokens.md (8 secciones con v2tokens callout)
+  - Deps: fix-tokens-full, tei-genre, temporal-analysis (auto-invocados)
+  - Genera: EVIDENCE_PACK_EMIGRANTE_v2tokens.md (con secciones temporales)
+
+- **`make temporal-analysis`** (PROMPT 2: Phase 12B) — Análisis temporal de composición
+  - Genera heatmaps década × autor
+  - Evolución temporal por género
+  - Timeline de producción literaria
+  - Archivos: emigrant_decade_author_matrix.csv, fig_emigrant_heatmap_decade_author.{png,pdf}, fig_emigrant_temporal_by_genre.{png,pdf}, fig_production_timeline.{png,pdf}
 
 ### Freeze y Limpieza
 
@@ -383,14 +399,41 @@ Solo artefactos finales necesarios para escritura:
 
 ---
 
+## Documentación Complementaria
+
+### Metodología y QA
+- **[METHODOLOGY.md](METHODOLOGY.md)** — Normalización v2tokens, bilingual figures, auditorías QA
+- **[DATA_DICTIONARY.md](DATA_DICTIONARY.md)** — Esquemas de CSVs finales con columnas reales
+- **[PAPER_METHOD_SUMMARY.md](PAPER_METHOD_SUMMARY.md)** — Síntesis metodológica paper-ready (1-2 páginas, citation-ready statements)
+
+### Sampling y Packs
+- **[PACK_V2_METHOD.md](PACK_V2_METHOD.md)** — Documentación del Emigrant Representation Pack v2 (180 casos, 74 obras)
+  - Reglas de selección (mandatory 1/obra + decade-balanced + controles negativos)
+  - Cobertura por autor/década/formato
+  - Limitaciones y uso
+
+### Reproducibilidad
+- **[FREEZE_LITE.md](FREEZE_LITE.md)** — Freeze-lite bundle documentation
+  - Estructura del bundle (94 archivos: figuras, tablas, reportes)
+  - Integridad SHA256 y verificación
+  - Uso en paper (stable paths, DOI placeholder)
+  - Diferencias vs. full freeze
+
+### Paper Integration
+- **[PAPER1_OUTLINE.md](PAPER1_OUTLINE.md)** — Outline del artículo principal
+- **[CHANGELOG.md](CHANGELOG.md)** — Historial de versiones (v1.0.0 → v1.0.2)
+
+---
+
 ## Próximos Pasos
 
 1. **Escritura etnográfica**: Usa outputs como memos, escribe en 03_analysis/memos/
 2. **Iteración**: Ajusta patterns en 02_methods/patterns/ → rebuild
-3. **Publicación**: Congela con `make freeze-lite` → sube a GitHub/Zenodo
+3. **Validación cualitativa**: Revisa reading packs (180 casos emigrante, 160 casos balanced)
+4. **Publicación**: Congela con `make freeze-lite` → sube a GitHub/Zenodo
 
 ---
 
 ## Contacto / Soporte
 
-Ver METHODOLOGY.md y PAPER1_OUTLINE.md para detalles técnicos.
+Ver documentación complementaria arriba para detalles técnicos, metodológicos y de reproducibilidad.

@@ -1,0 +1,6 @@
+format,n_obras,tokens_total,n_emigrant_mentions,emigrant_rate_per_1k_tokens,top_markers
+ensayo_cronica,3,232292,918,3.95,
+teatro,3,2031,6,2.95,
+cuento_relato,61,152672,417,2.73,
+poesia_poemario,6,131942,279,2.11,
+novela,7,499483,481,0.96,

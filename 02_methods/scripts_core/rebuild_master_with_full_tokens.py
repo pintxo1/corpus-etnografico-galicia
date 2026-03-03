@@ -76,13 +76,14 @@ def rebuild_master_table(master: pd.DataFrame, tokens_full: pd.DataFrame) -> pd.
                 result.loc[mask, 'tokens_total_full'] * 100).abs()
     result.loc[mask, 'token_mismatch_flag'] = (diff_pct > 20).astype(int)
     
-    # Reordenar columnas
+    # Reordenar columnas (preservar genre_norm si existe)
     cols_order = [
         'obra_id', 'title', 'author_normalized', 'year', 'decade',
+        'genre_norm', 'genre_raw', 'genre_confidence',
         'tokens_total', 'tokens_total_old', 'tokens_total_full',
         'n_cases_total', 'n_emigrant_mentions', 'emigrant_rate_per_1k_tokens',
         'top_3_scenes_by_rate', 'top_3_emigrant_markers',
-        'year_missing', 'format_missing', 'tokens_low', 'token_mismatch_flag'
+        'year_missing', 'format_missing', 'genre_missing_flag', 'tokens_low', 'token_mismatch_flag'
     ]
     
     result = result[[c for c in cols_order if c in result.columns]]
@@ -140,22 +141,27 @@ def rebuild_summary_tables(master: pd.DataFrame) -> tuple:
     
     print(f"[by_decade] {len(by_decade)} décadas")
     
-    # by_format
+    # by_format (usar genre_norm si existe, sino inferir)
     master_fmt = master.copy()
-    def infer_format(title: str) -> str:
-        title_lower = str(title).lower()
-        if any(word in title_lower for word in ['novela', 'romance', 'história']):
-            return 'novela'
-        elif any(word in title_lower for word in ['cantares', 'poema', 'follas']):
-            return 'poesía'
-        elif any(word in title_lower for word in ['historia', 'crónica', 'relación']):
-            return 'crónica'
-        else:
-            return 'unknown'
+    if 'genre_norm' in master_fmt.columns:
+        format_col = 'genre_norm'
+    else:
+        # Fallback: inferir de title (legacy)
+        def infer_format(title: str) -> str:
+            title_lower = str(title).lower()
+            if any(word in title_lower for word in ['novela', 'romance', 'história']):
+                return 'novela'
+            elif any(word in title_lower for word in ['cantares', 'poema', 'follas']):
+                return 'poesía'
+            elif any(word in title_lower for word in ['historia', 'crónica', 'relación']):
+                return 'crónica'
+            else:
+                return 'unknown'
+        
+        master_fmt['inferred_format'] = master_fmt['title'].apply(infer_format)
+        format_col = 'inferred_format'
     
-    master_fmt['inferred_format'] = master_fmt['title'].apply(infer_format)
-    
-    by_format = master_fmt.groupby('inferred_format').agg({
+    by_format = master_fmt.groupby(format_col).agg({
         'obra_id': 'count',
         'tokens_total': 'sum',
         'n_emigrant_mentions': 'sum',
@@ -164,7 +170,7 @@ def rebuild_summary_tables(master: pd.DataFrame) -> tuple:
     
     by_format = by_format.rename(columns={
         'obra_id': 'n_obras',
-        'inferred_format': 'format'
+        format_col: 'format'
     })
     
     by_format['emigrant_rate_per_1k_tokens'] = (

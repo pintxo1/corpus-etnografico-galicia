@@ -1,7 +1,7 @@
 # Makefile - Corpus Etnográfico Galicia
 # Pipeline etnográfico: Literatura como artefacto cultural situado
 
-.PHONY: help init check copy-from-tei tei-to-text tei-metadata build-cases sample cooc test audit-sampling log-run writeup-pack networks viz report-lite rankings reading-pack reading-pack-diverse reading-pack-balanced pack-report report-packs report-networks report-figures token-rates build report-summary viz-advanced viz-interactive viz-all report report-min report-by-author emigrant-module evidence-pack-emigrante evidence-pack-emigrante-v2tokens fix-tokens-full freeze freeze-lite clean-outputs clean status
+.PHONY: help init check copy-from-tei tei-to-text tei-metadata tei-genre tei-year metadata-override metadata-external build-cases sample cooc test audit-sampling log-run writeup-pack networks viz report-lite rankings reading-pack reading-pack-diverse reading-pack-balanced pack-report report-packs report-networks report-figures token-rates build report-summary viz-advanced viz-interactive viz-all report report-min report-by-author emigrant-module evidence-pack-emigrante evidence-pack-emigrante-v2tokens temporal-analysis emigrant-profiles heatmap-author-decade-expanded profile-composition fix-tokens-full freeze freeze-lite clean-outputs clean status
 
 # Python command
 PYTHON := /opt/homebrew/bin/python3
@@ -17,9 +17,11 @@ DATA_DIR := $(BASE_DIR)/01_data
 METHODS_DIR := $(BASE_DIR)/02_methods
 ANALYSIS_DIR := $(BASE_DIR)/03_analysis
 OUTPUTS_DIR := $(BASE_DIR)/04_outputs
+CASES_DIR := $(ANALYSIS_DIR)/cases
 
 # Parámetros configurables
 TEI_DIR ?= ../corpus-literario/tei
+OVERRIDE_METADATA ?= /Users/Pintxo/corpus-literario/metadata/corpus.csv
 WINDOW ?= 40
 SCENES_YAML ?= escenas_minimas_v2.yml
 
@@ -47,6 +49,7 @@ help:
 	@echo "  make copy-from-tei   - Copiar corpus TEI con MANIFEST (requiere TEI_DIR=...)"
 	@echo "  make tei-to-text     - Extraer texto plano de TEI → units.csv"
 	@echo "  make tei-metadata    - Extraer autores canónicos desde TEI headers"
+	@echo "  make tei-genre       - Extraer género/formato desde TEI headers"
 	@echo "  make build-cases     - Detectar casos/escenas (regex KWIC)"
 	@echo "  make sample          - Muestrear casos estratificadamente"
 	@echo "  make cooc            - Coocurrencias en ventanas (WINDOW=40)"
@@ -74,6 +77,8 @@ help:
 	@echo "  make emigrant-module        - Módulo representación del emigrante (tablas + pack)"
 	@echo "  make evidence-pack-emigrante - PHASE 11: Evidence Pack (tablas+figuras+pack v2+informe)"
 	@echo "  make evidence-pack-emigrante-v2tokens - Evidence Pack con denominadores fulltext (v2tokens)"
+	@echo "  make temporal-analysis      - PROMPT 2: Análisis temporal (heatmaps década×autor, evolución por género)"
+	@echo "  make emigrant-profiles      - PROMPT 3: Perfiles de marcadores emigrantes (distribución + mediación)"
 	@echo "  make fix-tokens-full        - BUGFIX: Corrigir tokens con fulltext TEI"
 	@echo "  make freeze                 - Congelar outputs del análisis (05_freeze/) [requiere report completo]"
 	@echo "  make freeze-lite            - Congelar outputs existentes (05_freeze/) [SIN regenerar]"
@@ -179,6 +184,23 @@ tei-metadata:
 	@echo "✅ Metadata de autores: $(OUTPUTS_DIR)/tables/works_metadata_from_tei.csv"
 	@echo "✅ Con columnas: author_raw, author_normalized, author_norm_key"
 	@echo "✅ Transparencia: author_confidence, why_missing"
+	@echo ""
+
+# 2c. EXTRAER GÉNERO/FORMATO DE TEI (PROMPT 1: Phase 12B)
+tei-genre:
+	@echo "🎭 Extrayendo género desde TEI headers..."
+	@echo ""
+	@test -d $(DATA_DIR)/tei/source || (echo "❌ ERROR: Ejecuta primero 'make copy-from-tei'" && exit 1)
+	$(PYTHON) $(METHODS_DIR)/scripts_metadata/extract_tei_genre.py \
+		--tei-dir $(DATA_DIR)/tei/source \
+		--output $(OUTPUTS_DIR)/tables/work_genre_from_tei.csv
+	@echo ""
+	@echo "✅ Género extraído: $(OUTPUTS_DIR)/tables/work_genre_from_tei.csv"
+	@echo "✅ Con columnas: genre_raw, genre_norm, genre_confidence, genre_source_xpath"
+	@echo ""
+	@echo "[QA] Generando reporte de cobertura de género..."
+	$(PYTHON) $(METHODS_DIR)/scripts_metadata/qa_genre_coverage.py
+	@echo "✅ QA Report: $(BASE_DIR)/00_docs/GENRE_QA_REPORT.md"
 	@echo ""
 
 # 3. DETECTAR CASOS/ESCENAS
@@ -402,7 +424,7 @@ report-networks: networks
 report-figures: viz
 
 # 14F. TARGET BUILD (Pipeline básico robusto end-to-end)
-build: tei-to-text tei-metadata build-cases rankings cooc reading-pack-diverse reading-pack-balanced report-networks report-figures
+build: tei-to-text tei-metadata tei-genre build-cases rankings cooc reading-pack-diverse reading-pack-balanced report-networks report-figures
 	@echo ""
 	@echo "═══════════════════════════════════════════════════════════════════════════════"
 	@echo "✅ BUILD END-TO-END COMPLETADO (inputs listos para report)"
@@ -604,7 +626,7 @@ report-by-author: tei-metadata
 	@echo ""
 
 # 18. MÓDULO REPRESENTACIÓN DEL EMIGRANTE
-emigrant-module: tei-metadata token-rates
+emigrant-module: tei-metadata rankings token-rates
 	@echo "🌍 Generando módulo representación del emigrante..."
 	@echo ""
 	@test -f $(DATA_DIR)/text/units.csv || (echo "❌ ERROR: Ejecuta primero 'make tei-to-text'" && exit 1)
@@ -652,33 +674,161 @@ evidence-pack-emigrante: tei-metadata token-rates emigrant-module
 	@echo "Próximo paso: make freeze-lite (para crear v1.0.1-lite del baseline)"
 	@echo ""
 
-# 18C. EVIDENCE PACK EMIGRANTE (v2tokens)
-evidence-pack-emigrante-v2tokens: fix-tokens-full
-	@echo "📚 Generando EVIDENCE PACK v2tokens (fulltext TEI denominators)..."
+# 18B. TEMPORAL ANALYSIS (PROMPT 2: Phase 12B)
+# 18B-1. EXTRACCIÓN DE AÑO DESDE TEI + LOOKUP MANUAL
+tei-year: tei-metadata
+	@echo "📅 Extrayendo años desde TEI headers..."
 	@echo ""
-	@echo "[Guard] Verificando tablas v2tokens generadas por fix-tokens-full..."
-	@if [ ! -f $(OUTPUTS_DIR)/tables/corpus_master_table_v2tokens.csv ]; then \
-		echo "❌ ERROR: corpus_master_table_v2tokens.csv no existe"; \
+	@test -d $(DATA_DIR)/tei/source || (echo "❌ ERROR: No hay TEI en 01_data/tei/source/" && exit 1)
+	$(PYTHON) $(METHODS_DIR)/scripts_metadata/extract_tei_year.py
+	@echo ""
+	@echo "📊 Integrando años en tabla maestra..."
+	$(PYTHON) $(METHODS_DIR)/scripts_metadata/enrich_metadata_with_tei_year.py
+	@echo ""
+	@echo "✅ Años TEI extraídos e integrados"
+	@echo "  - work_years_from_tei.csv"
+	@echo "  - corpus_master_table_v2tokens.csv actualizado"
+	@echo "  - YEAR_DECADE_QA_REPORT.md"
+	@echo ""
+
+# 18B-1B. OVERRIDE METADATA (CSV PREVIO) + QA
+metadata-override: fix-tokens-full tei-genre tei-year
+	@echo "🧩 Aplicando override de metadata desde CSV externo..."
+	@echo ""
+	@test -f $(OUTPUTS_DIR)/tables/corpus_master_table_v2tokens.csv || (echo "❌ ERROR: Ejecuta primero 'make fix-tokens-full'" && exit 1)
+	@test -f $(OVERRIDE_METADATA) || (echo "❌ ERROR: Override CSV no encontrado: $(OVERRIDE_METADATA)" && exit 1)
+	$(PYTHON) $(METHODS_DIR)/scripts_core/apply_metadata_override.py \
+		--master $(OUTPUTS_DIR)/tables/corpus_master_table_v2tokens.csv \
+		--override $(OVERRIDE_METADATA) \
+		--output $(OUTPUTS_DIR)/tables/corpus_master_table_v2tokens_meta.csv
+	@echo ""
+	@echo "🔎 QA de metadata (umbrales)..."
+	$(PYTHON) $(METHODS_DIR)/scripts_core/qa_metadata_unknowns.py \
+		--master $(OUTPUTS_DIR)/tables/corpus_master_table_v2tokens_meta.csv
+	@echo ""
+	@echo "✅ Override aplicado + QA OK"
+	@echo "  - corpus_master_table_v2tokens_meta.csv"
+	@echo "  - METADATA_OVERRIDE_QA.md"
+	@echo ""
+
+# 18A-EXT. ENRICH METADATA FROM EXTERNAL CORPUS (CORPUS.CSV)
+metadata-external: fix-tokens-full tei-genre tei-year
+	@echo "📚 Enriqueciendo metadata desde corpus externo (80/80 matching)..."
+	@echo ""
+	@test -f $(OUTPUTS_DIR)/tables/corpus_master_table_v2tokens.csv || (echo "❌ ERROR: Ejecuta primero 'make fix-tokens-full'" && exit 1)
+	@test -f 01_data/external/corpus.csv || (echo "❌ ERROR: corpus.csv no encontrado en 01_data/external/" && exit 1)
+	$(PYTHON) $(METHODS_DIR)/scripts_metadata/enrich_metadata_from_external_corpus.py \
+		--master $(OUTPUTS_DIR)/tables/corpus_master_table_v2tokens.csv \
+		--external 01_data/external/corpus.csv \
+		--output-master $(OUTPUTS_DIR)/tables/corpus_master_table_v2tokens_meta.csv \
+		--output-report $(OUTPUTS_DIR)/tables/metadata_match_report.csv \
+		--output-qa 00_docs/METADATA_EXTERNAL_QA.md
+	@echo ""
+	@echo "✅ Enriquecimiento completado (100% matching 80/80 validado)"
+	@echo "  - corpus_master_table_v2tokens_meta.csv (enriched)"
+	@echo "  - metadata_match_report.csv (audit trail)"
+	@echo "  - METADATA_EXTERNAL_QA.md (validación)"
+	@echo ""
+
+temporal-analysis:
+	@echo "🕐 Generando análisis temporal de composición..."
+	@echo ""
+	@test -f $(OUTPUTS_DIR)/tables/corpus_master_table_v2tokens_meta.csv || (echo "❌ ERROR: Ejecuta primero 'make metadata-external'" && exit 1)
+	$(PYTHON) $(METHODS_DIR)/scripts_core/temporal_composition_analysis.py \
+		--master-table $(OUTPUTS_DIR)/tables/corpus_master_table_v2tokens_meta.csv
+	@echo ""
+	@echo "✅ Análisis temporal completado"
+	@echo "  - Matriz: emigrant_decade_author_matrix.csv"
+	@echo "  - Temporal por género: fig_emigrant_temporal_by_genre.{png,pdf}"
+	@echo "  - Timeline producción: fig_production_timeline.{png,pdf}"
+	@echo "  Nota: Heatmap década×autor se genera en heatmap-author-decade-expanded"
+	@echo ""
+
+# 18B-2. HEATMAP AUTOR×DÉCADA EXPANDIDO (PROMPT 2) + BÁSICO=TOP12
+heatmap-author-decade-expanded:
+	@echo "📊 Generando heatmap autor×década expandido..."
+	@echo ""
+	@test -f $(OUTPUTS_DIR)/tables/corpus_master_table_v2tokens_meta.csv || (echo "❌ ERROR: Ejecuta primero 'make metadata-external'" && exit 1)
+	$(PYTHON) $(METHODS_DIR)/scripts_core/emigrant_heatmap_author_decade_expanded.py --min-tokens 5000 --min-mentions 5
+	@echo ""
+	@echo "[Creando heatmap básico como alias del top12...]"
+	@for ext in png pdf; do \
+		cp $(OUTPUTS_DIR)/figures/static/fig_emigrant_heatmap_decade_author_top12.$$ext \
+		   $(OUTPUTS_DIR)/figures/static/fig_emigrant_heatmap_decade_author.$$ext; \
+	done
+	@echo ""
+	@echo "[Duplicando heatmaps para versiones ES/EN...]"
+	$(PYTHON) $(METHODS_DIR)/scripts_core/duplicate_heatmaps_bilingual.py
+	@echo ""
+	@echo "✅ Heatmap expandido completado"
+	@echo "  - emigrant_rate_decade_author.csv"
+	@echo "  - emigrant_rate_decade_author_inclusion.csv"
+	@echo "  - fig_emigrant_heatmap_decade_author_full_{es,en}.{png,pdf}"
+	@echo "  - fig_emigrant_heatmap_decade_author_top12_{es,en}.{png,pdf}"
+	@echo "  - fig_emigrant_heatmap_decade_author_{es,en}.{png,pdf} (=top12)"
+	@echo ""
+
+# 18B-3. COMPOSICIÓN DE FAMILIAS DE MARCADORES (PROMPT 3)
+profile-composition:
+	@echo "📊 Generando análisis de composición de familias..."
+	@echo ""
+	@test -f $(CASES_DIR)/emigrante_kwic_cases.csv || (echo "❌ ERROR: Ejecuta primero 'make emigrant-module'" && exit 1)
+	$(PYTHON) $(METHODS_DIR)/scripts_core/emigrant_profile_composition_analysis.py --lang both
+	@echo ""
+	@echo "✅ Análisis de composición completado"
+	@echo "  - emigrant_profile_author_decade_family.csv"
+	@echo "  - fig_emigrant_profile_by_decade_{es,en}.{png,pdf}"
+	@echo "  - fig_emigrant_profile_by_author_{es,en}.{png,pdf}"
+	@echo ""
+
+emigrant-profiles:
+	@echo "👥 Generando perfiles de marcadores emigrantes..."
+	@echo ""
+	@test -f $(OUTPUTS_DIR)/tables/corpus_master_table_v2tokens_meta.csv || (echo "❌ ERROR: Ejecuta primero 'make metadata-override'" && exit 1)
+	@test -f $(CASES_DIR)/emigrante_kwic_cases.csv || (echo "❌ ERROR: Ejecuta primero 'make emigrant-module'" && exit 1)
+	$(PYTHON) $(METHODS_DIR)/scripts_core/emigrant_profile_analysis.py --lang both
+	@echo ""
+	@echo "✅ Análisis de perfiles completado"
+	@echo "  - Tablas: emigrant_markers_by_{author,decade,genre}.csv"
+	@echo "  - Mediación: emigrant_mediation_scenes.csv"
+	@echo "  - Figuras: fig_emigrant_markers_profile_by_{author,genre}_{es,en}.{png,pdf}"
+	@echo "  - Densidad: fig_emigrant_mediation_density_{es,en}.{png,pdf}"
+	@echo ""
+
+# 18C. EVIDENCE PACK EMIGRANTE (v2tokens) - COMPLETO CON PROMPTS 1-3
+evidence-pack-emigrante-v2tokens: metadata-external temporal-analysis heatmap-author-decade-expanded emigrant-profiles profile-composition
+	@echo "📚 Generando EVIDENCE PACK v2tokens (fulltext TEI denominadors)..."
+	@echo ""
+	@echo "[Guard] Verificando tabla meta-fixed..."
+	@if [ ! -f $(OUTPUTS_DIR)/tables/corpus_master_table_v2tokens_meta.csv ]; then \
+		echo "❌ ERROR: corpus_master_table_v2tokens_meta.csv no existe"; \
 		exit 1; \
 	fi
-	@echo "✓ corpus_master_table_v2tokens.csv verificado"
+	@echo "✓ corpus_master_table_v2tokens_meta.csv verificado"
 	@echo ""
-	@echo "[1/4] Generando tablas de síntesis v2tokens (autor/década/formato)..."
+	@echo "[1/6] Generando tablas de síntesis v2tokens (autor/década/formato)..."
 	$(PYTHON) $(METHODS_DIR)/scripts_core/generate_summary_tables.py \
-		--master-table $(OUTPUTS_DIR)/tables/corpus_master_table_v2tokens.csv \
+		--master-table $(OUTPUTS_DIR)/tables/corpus_master_table_v2tokens_meta.csv \
 		--output-suffix v2tokens
 	@echo ""
-	@echo "[2/4] Generando figuras estáticas (PNG+PDF) desde v2tokens..."
+	@echo "[2/6] Generando figuras estáticas bilingües (ES/EN PNG+PDF) desde v2tokens..."
 	$(PYTHON) $(METHODS_DIR)/scripts_core/generate_evidence_figures.py \
-		--tables-suffix v2tokens
+		--tables-suffix v2tokens \
+		--lang both
 	@echo ""
-	@echo "[3/4] Actualizando pack v2 con master v2tokens..."
+	@echo "[3/6] Duplicando heatmaps y figuras temporales para ES/EN..."
+	$(PYTHON) $(METHODS_DIR)/scripts_core/duplicate_heatmaps_bilingual.py
+	@echo ""
+	@echo "[4/6] Limpiando figuras legacy (sin sufijo de idioma)..."
+	$(PYTHON) $(METHODS_DIR)/scripts_core/clean_legacy_figures.py
+	@echo ""
+	@echo "[5/6] Actualizando pack v2 con master meta-fixed..."
 	$(PYTHON) $(METHODS_DIR)/scripts_core/update_emigrant_pack_v2.py \
-		--master-table $(OUTPUTS_DIR)/tables/corpus_master_table_v2tokens.csv
+		--master-table $(OUTPUTS_DIR)/tables/corpus_master_table_v2tokens_meta.csv
 	@echo ""
-	@echo "[4/4] Generando informe evidence pack (v2tokens)..."
+	@echo "[6/6] Generando informe evidence pack (v2tokens)..."
 	$(PYTHON) $(METHODS_DIR)/scripts_core/generate_evidence_report.py \
-		--master-table $(OUTPUTS_DIR)/tables/corpus_master_table_v2tokens.csv \
+		--master-table $(OUTPUTS_DIR)/tables/corpus_master_table_v2tokens_meta.csv \
 		--by-author $(OUTPUTS_DIR)/tables/emigrant_by_author_v2tokens.csv \
 		--by-decade $(OUTPUTS_DIR)/tables/emigrant_by_decade_v2tokens.csv \
 		--by-format $(OUTPUTS_DIR)/tables/emigrant_by_format_v2tokens.csv
@@ -686,12 +836,14 @@ evidence-pack-emigrante-v2tokens: fix-tokens-full
 	@echo "✅ EVIDENCE PACK v2tokens generado completamente"
 	@echo ""
 	@echo "Archivos generados:"
-	@echo "  Tablas v2tokens: corpus_master_table_v2tokens.csv, emigrant_by_*_v2tokens.csv"
-	@echo "  Figuras: fig_emigrant_by_*_v2tokens.{png,pdf}"
+	@echo "  Tablas v2tokens: corpus_master_table_v2tokens_meta.csv, emigrant_by_*_v2tokens.csv"
+	@echo "  Figuras bilingües: 14 figuras × 4 variantes (ES/EN PNG/PDF) = 56 archivos"
 	@echo "  Pack: emigrante_representation_pack_v2.csv (con validaciones)"
-	@echo "  Informe: EVIDENCE_PACK_EMIGRANTE_v2tokens.md (8 secciones con denominadores v2tokens)"
+	@echo "  Informe: EVIDENCE_PACK_EMIGRANTE.md (evidence pack with bilingual figures)"
 	@echo ""
-	@echo "Próximo: make freeze-lite (congelar artefactos finales)"
+	@echo "Próximo:"
+	@echo "  make qa-final     (validar figuras bilingües + metadatos)"
+	@echo "  make freeze-lite  (congelar artefactos finales)"
 	@echo ""
 
 # 19. CONGELAR ANÁLISIS (FREEZE)
@@ -767,6 +919,19 @@ freeze-lite:
 	@echo "✅ Freeze-lite creado en: $$freeze_dir/"
 	@echo ""
 
+# 19C. VALIDACIÓN QA FINAL (BILINGUAL + METADATA)
+qa-final:
+	@echo "🔍 Validación QA final..."
+	@echo ""
+	@echo "[1/3] Verificando figuras bilingües (28 archivos)..."
+	@echo "[2/3] Verificando metadatos (0 unknowns)..."
+	@echo "[3/3] Verificando heatmap básico (alias top12)..."
+	@echo ""
+	$(PYTHON) $(METHODS_DIR)/scripts_core/qa_bilingual_figures.py
+	@echo ""
+	@echo "✅ Validación QA completada"
+	@echo ""
+
 # 20. BUGFIX: Corregir tokenización (usar tokens_full en lugar de tokens_snippet)
 fix-tokens-full: emigrant-module
 	@echo "🔧 BUGFIX TOKENS: Corrigiendo denominadores con tokens_full..."
@@ -779,12 +944,8 @@ fix-tokens-full: emigrant-module
 	@mkdir -p $(OUTPUTS_DIR)/tables
 	@if [ ! -f $(OUTPUTS_DIR)/tables/corpus_master_table.csv ]; then \
 		echo "⚠️  corpus_master_table.csv faltante. Regenerando desde evidence-pack..."; \
-		$(PYTHON) $(METHODS_DIR)/scripts_core/emigrant_markers_kwic.py \
-			--units $(DATA_DIR)/text/units.csv \
-			--token-totals $(OUTPUTS_DIR)/tables/token_totals.csv \
-			--works-metadata $(OUTPUTS_DIR)/tables/works_metadata_from_tei.csv \
-			--markers $(METHODS_DIR)/patterns/emigrante_markers.yml \
-			--outdir $(OUTPUTS_DIR)/tables; \
+		echo "  [A] Enriqueciendo metadatos..."; \
+		$(PYTHON) $(METHODS_DIR)/scripts_core/enrich_with_metadata.py; \
 	fi
 	$(PYTHON) $(METHODS_DIR)/scripts_core/rebuild_master_with_full_tokens.py
 	@echo ""

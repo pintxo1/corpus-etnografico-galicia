@@ -11,6 +11,9 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import pandas as pd
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from figure_export import save_figure_variants
+
 
 def scatter_coverage_concentration(scene_summary_path, outdir, dpi=300):
     """
@@ -74,15 +77,8 @@ def scatter_coverage_concentration(scene_summary_path, outdir, dpi=300):
     
     plt.tight_layout()
     
-    # Save PNG
-    png_path = Path(outdir) / "fig_scene_scatter.png"
-    plt.savefig(png_path, dpi=dpi, bbox_inches='tight')
-    print(f"✅ {png_path} (DPI: {dpi})")
-    
-    # Save PDF
-    pdf_path = Path(outdir) / "fig_scene_scatter.pdf"
-    plt.savefig(pdf_path, format='pdf', bbox_inches='tight')
-    print(f"✅ {pdf_path}")
+    base_path = Path(outdir) / "fig_scene_scatter"
+    save_figure_variants(fig, base_path, dpi=dpi, save_png=True, save_pdf=True, save_jpeg=True, jpeg_quality=95)
     
     plt.close()
 

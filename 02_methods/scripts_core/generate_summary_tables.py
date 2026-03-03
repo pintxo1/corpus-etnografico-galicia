@@ -79,23 +79,28 @@ def generate_by_decade(master: pd.DataFrame) -> pd.DataFrame:
     return by_decade
 
 def generate_by_format(master: pd.DataFrame) -> pd.DataFrame:
-    """Tabla por formato (si existe; por ahora todos desconocidos)."""
-    # Inferir formato de title (aproximado)
-    def infer_format(title: str) -> str:
-        title_lower = str(title).lower()
-        if any(word in title_lower for word in ['novela', 'romance', 'história']):
-            return 'novela'
-        elif any(word in title_lower for word in ['cantares', 'poema', 'follas']):
-            return 'poesía'
-        elif any(word in title_lower for word in ['historia', 'crónica', 'relación']):
-            return 'crónica'
-        else:
+    """Tabla por formato/género (genre_norm extraído de TEI)."""
+    # Preferir columna format si existe; fallback a genre_norm
+    if 'format' in master.columns and master['format'].notna().any():
+        format_col = 'format'
+    elif 'genre_norm' in master.columns:
+        format_col = 'genre_norm'
+    else:
+        # Fallback: inferir de title (legacy)
+        def infer_format(title: str) -> str:
+            title_lower = str(title).lower()
+            if any(word in title_lower for word in ['novela', 'romance', 'historia']):
+                return 'novela'
+            if any(word in title_lower for word in ['cantares', 'poema', 'follas']):
+                return 'poesia'
+            if any(word in title_lower for word in ['historia', 'cronica', 'relacion']):
+                return 'cronica'
             return 'unknown'
+        master = master.copy()
+        master['genre_norm'] = master['title'].apply(infer_format)
+        format_col = 'genre_norm'
     
-    master_fmt = master.copy()
-    master_fmt['inferred_format'] = master_fmt['title'].apply(infer_format)
-    
-    by_format = master_fmt.groupby('inferred_format').agg({
+    by_format = master.groupby(format_col).agg({
         'obra_id': 'count',
         'tokens_total': 'sum',
         'n_emigrant_mentions': 'sum',
@@ -104,7 +109,7 @@ def generate_by_format(master: pd.DataFrame) -> pd.DataFrame:
     
     by_format = by_format.rename(columns={
         'obra_id': 'n_obras',
-        'inferred_format': 'format'
+        format_col: 'format'
     })
     
     # Calcular rate per 1k tokens
@@ -120,7 +125,7 @@ def generate_by_format(master: pd.DataFrame) -> pd.DataFrame:
         'n_emigrant_mentions', 'emigrant_rate_per_1k_tokens', 'top_markers'
     ]].sort_values('emigrant_rate_per_1k_tokens', ascending=False)
     
-    print(f"[by_format] {len(by_format)} formatos")
+    print(f"[by_format] {len(by_format)} formatos/géneros")
     return by_format
 
 def main():
@@ -128,8 +133,8 @@ def main():
     parser = argparse.ArgumentParser(description="Genera tablas de sintesis (autor/decada/formato)")
     parser.add_argument(
         "--master-table",
-        default=str(TABLES_DIR / "corpus_master_table.csv"),
-        help="Ruta a tabla maestra (default: corpus_master_table.csv)"
+        default=str(TABLES_DIR / "corpus_master_table_v2tokens_meta.csv"),
+        help="Ruta a tabla maestra (default: corpus_master_table_v2tokens_meta.csv)"
     )
     parser.add_argument(
         "--output-suffix",
@@ -142,7 +147,11 @@ def main():
     print("GENERATE_SUMMARY_TABLES: Síntesis por autor/década/formato")
     print("="*70 + "\n")
     
-    master = load_master_table(Path(args.master_table))
+    master_path = Path(args.master_table)
+    if not master_path.exists():
+        fallback = TABLES_DIR / "corpus_master_table_v2tokens.csv"
+        master_path = fallback if fallback.exists() else master_path
+    master = load_master_table(master_path)
     
     # Generar tablas
     by_author = generate_by_author(master)

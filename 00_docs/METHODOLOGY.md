@@ -38,7 +38,56 @@ Derived tables use these fulltext denominators (v2tokens suffix).
 Reading packs are stratified across authors and decades. Packs are a reading aid,
 not a statistical sample.
 
-## Reproducibility
+### Emigrant Representation Pack v2
 
-All scripts used by Makefile are in 02_methods/ and can regenerate outputs from TEI.
-Freeze-lite packages only final artifacts with SHA256 manifests.
+A specialized pack of 180 casos from 74 obras (92.5% corpus coverage) designed for
+qualitative analysis of emigrant representations. Selection strategy:
+- Phase 1: Mandatory 1 caso/obra (coverage)
+- Phase 2: Decade-balanced supplementary (temporal distribution)
+- Phase 3: 10% negative controls (NOT IMPLEMENTED)
+
+**Documentation:** See [PACK_V2_METHOD.md](PACK_V2_METHOD.md) for detailed selection rules, 
+coverage tables, and methodological limitations.
+
+## Bilingual figures (ES/EN)
+
+### Naming convention
+
+All evidence-pack figures are generated in Spanish (ES) and English (EN), with 4 files per basename:
+- `{basename}_es.{png,pdf}` (Spanish version)
+- `{basename}_en.{png,pdf}` (English version)
+
+Examples:
+- `fig_emigrant_by_author_top15_es.png` (Spanish, PNG)
+- `fig_emigrant_by_author_top15_en.pdf` (English, PDF)
+
+### Translation approach
+
+**Core evidence figures** (4 basenames): Full i18n implementation with translated:
+- Axis labels (e.g., "Obras" → "Works", "Menciones" → "Mentions")
+- Titles (e.g., "Distribución por Década" → "Distribution by Decade")
+- Genre labels (e.g., "cuento_relato" → "Short Story")
+
+**Heatmaps** (5 basenames): Pragmatic duplication approach:
+- Files are duplicated with `_es`/`_en` suffixes
+- Rationale: Minimal translatable text (author names, decades don't translate)
+- Future: Can be replaced with full i18n if axis labels require translation
+
+### Translation module
+
+Centralized translation support in `02_methods/scripts_core/i18n_figures.py`:
+- `TRANSLATIONS` dict: Nested ES/EN translations for common strings
+- `t(key, lang='es')`: Get translation for key
+- `save_fig(fig, basename, outdir, lang, dpi=300)`: Save with language suffix
+- `get_genre_labels(lang='es')`: Return genre mappings for current language
+- `validate_bilingual_outputs(basename, outdir)`: Verify all 4 files exist
+
+### QA validation
+
+`make qa-final` runs `qa_bilingual_figures.py` to validate:
+1. Bilingual figures: 28 files exist (7 basenames × 4 variants)
+2. Metadata quality: 0 unknown_genre, 0 unknown_year, 0 unknown_decade
+3. Heatmap basic: `fig_emigrant_heatmap_decade_author.{png,pdf}` exists (alias of top12)
+
+Exit code 0 = all pass, 1 = fail (pipeline aborts).
+

@@ -10,6 +10,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from figure_export import save_figure_variants
+
 
 def violin_rates_by_scene(cases_path, token_totals_path, outdir, dpi=300):
     """Generate violin plots showing case rate distribution per 1k tokens by scene"""
@@ -89,13 +92,9 @@ def violin_rates_by_scene(cases_path, token_totals_path, outdir, dpi=300):
     
     plt.tight_layout()
     
-    png_path = Path(outdir) / "fig_scene_rates_distribution.png"
-    plt.savefig(png_path, dpi=dpi, bbox_inches='tight')
-    print(f"✅ {png_path} (DPI: {dpi})")
-    
-    pdf_path = Path(outdir) / "fig_scene_rates_distribution.pdf"
-    plt.savefig(pdf_path, format='pdf', bbox_inches='tight')
-    print(f"✅ {pdf_path} (rate distributions for {len(selected_scenes)} scenes)")
+    base_path = Path(outdir) / "fig_scene_rates_distribution"
+    save_figure_variants(fig, base_path, dpi=dpi, save_png=True, save_pdf=True, save_jpeg=True, jpeg_quality=95)
+    print(f"✅ fig_scene_rates_distribution.* (rate distributions for {len(selected_scenes)} scenes)")
     
     plt.close()
     

@@ -109,10 +109,32 @@ def load_emigrant_mentions() -> pd.DataFrame:
     print(f"[emigrant] Cargadas menciones para {len(df)} obras")
     return df
 
+def load_genre() -> pd.DataFrame:
+    """Carga work_genre_from_tei.csv (extraído de TEI headers)."""
+    genre_file = TABLES_DIR / "work_genre_from_tei.csv"
+    if not genre_file.exists():
+        print(f"[warning] No existe {genre_file}. Ejecuta extract_tei_genre.py primero.")
+        # Retornar DataFrame vacío con columnas esperadas
+        return pd.DataFrame(columns=['obra_id', 'genre_raw', 'genre_norm', 'genre_confidence', 
+                                     'genre_source_xpath', 'genre_missing_flag'])
+    
+    df = pd.read_csv(genre_file)
+    print(f"[genre] Cargados géneros para {len(df)} obras")
+    
+    # Stats
+    genre_counts = df['genre_norm'].value_counts()
+    print(f"  - Distribución: {dict(genre_counts)}")
+    unknown_count = (df['genre_norm'] == 'unknown').sum()
+    if unknown_count > 0:
+        print(f"  ⚠️  {unknown_count} obras con genre_norm=unknown")
+    
+    return df
+
 def build_master_table(metadata: pd.DataFrame, 
                        tokens: pd.DataFrame,
                        case_counts: pd.DataFrame,
-                       emigrant: pd.DataFrame) -> pd.DataFrame:
+                       emigrant: pd.DataFrame,
+                       genre: pd.DataFrame) -> pd.DataFrame:
     """Construye tabla maestra del corpus."""
     
     # Merge todos los datos
@@ -121,6 +143,23 @@ def build_master_table(metadata: pd.DataFrame,
     # Agregar tokens
     master = master.merge(tokens[['obra_id', 'tokens_total']], on='obra_id', how='left')
     master['tokens_total'] = master['tokens_total'].fillna(0).astype(int)
+    
+    # Agregar género desde TEI
+    genre_cols = ['obra_id', 'genre_raw', 'genre_norm', 'genre_confidence', 'genre_missing_flag']
+    available_genre_cols = [c for c in genre_cols if c in genre.columns]
+    if len(genre) > 0:
+        master = master.merge(genre[available_genre_cols], on='obra_id', how='left')
+        # Rellenar con unknown si no hay match
+        master['genre_raw'] = master['genre_raw'].fillna('')
+        master['genre_norm'] = master['genre_norm'].fillna('unknown')
+        master['genre_confidence'] = master['genre_confidence'].fillna('low')
+        master['genre_missing_flag'] = master['genre_missing_flag'].fillna(1).astype(int)
+    else:
+        # Si no hay datos de género, crear columnas vacías
+        master['genre_raw'] = ''
+        master['genre_norm'] = 'unknown'
+        master['genre_confidence'] = 'low'
+        master['genre_missing_flag'] = 1
     
     # Agregar conteos de casos
     master = master.merge(case_counts[['obra_id', 'n_cases_total', 'top_3_scenes_by_rate']], 
@@ -136,16 +175,17 @@ def build_master_table(metadata: pd.DataFrame,
     master['emigrant_rate_per_1k_tokens'] = master['emigrant_rate_per_1k_tokens'].fillna(0.0)
     master['top_3_emigrant_markers'] = master['top_3_emigrant_markers'].fillna('')
     
-    # Flags de calidad
-    master['format_missing'] = 1  # Por ahora todos sin formato explícito
+    # Flags de calidad (format_missing ahora basado en genre_missing_flag)
+    master['format_missing'] = master['genre_missing_flag']
     master['tokens_low'] = (master['tokens_total'] < 1000).astype(int)
     
     # Reordenar columnas
     master = master[[
         'obra_id', 'title', 'author_normalized', 'year', 'decade',
+        'genre_norm', 'genre_raw', 'genre_confidence',
         'tokens_total', 'n_cases_total', 'n_emigrant_mentions', 'emigrant_rate_per_1k_tokens',
         'top_3_scenes_by_rate', 'top_3_emigrant_markers',
-        'year_missing', 'format_missing', 'tokens_low'
+        'year_missing', 'format_missing', 'genre_missing_flag', 'tokens_low'
     ]]
     
     master = master.sort_values(['author_normalized', 'year']).reset_index(drop=True)
@@ -153,15 +193,25 @@ def build_master_table(metadata: pd.DataFrame,
     print(f"[master] Tabla maestra construida: {master.shape[0]} obras x {master.shape[1]} columnas")
     return master
 
-def enrich_existing_files(metadata: pd.DataFrame):
-    """Enriquece archivos existentes con year/decade."""
+def enrich_existing_files(metadata: pd.DataFrame, genre: pd.DataFrame):
+    """Enriquece archivos existentes con year/decade/genre."""
+    
+    # Combinar metadata con genre para propagación
+    metadata_with_genre = metadata.merge(
+        genre[['obra_id', 'genre_norm', 'genre_raw', 'genre_confidence']], 
+        on='obra_id', 
+        how='left'
+    )
+    metadata_with_genre['genre_norm'] = metadata_with_genre['genre_norm'].fillna('unknown')
+    metadata_with_genre['genre_raw'] = metadata_with_genre['genre_raw'].fillna('')
+    metadata_with_genre['genre_confidence'] = metadata_with_genre['genre_confidence'].fillna('low')
     
     # units.csv
     try:
         units_file = DATA_DIR / "text" / "units.csv"
         units_df = pd.read_csv(units_file)
         units_enrich = units_df.merge(
-            metadata[['obra_id', 'year', 'decade']], 
+            metadata_with_genre[['obra_id', 'year', 'decade', 'genre_norm']], 
             on='obra_id', 
             how='left'
         )
@@ -178,7 +228,7 @@ def enrich_existing_files(metadata: pd.DataFrame):
         rankings_file = TABLES_DIR / "case_rankings.csv"
         rankings_df = pd.read_csv(rankings_file)
         rankings_enrich = rankings_df.merge(
-            metadata[['obra_id', 'year', 'decade']], 
+            metadata_with_genre[['obra_id', 'year', 'decade', 'genre_norm']], 
             on='obra_id', 
             how='left'
         )
@@ -190,11 +240,19 @@ def enrich_existing_files(metadata: pd.DataFrame):
     except Exception as e:
         print(f"[warning] Error enriqueciendo case_rankings.csv: {e}")
     
-    # emigrant_mentions_by_work.csv ya tiene year; agregar decade
+    # emigrant_mentions_by_work.csv ya tiene year; agregar decade + genre
     try:
         emigrant_file = TABLES_DIR / "emigrant_mentions_by_work.csv"
         emigrant_df = pd.read_csv(emigrant_file)
-        emigrant_df['decade'] = emigrant_df['year'].apply(year_to_decade)
+        emigrant_df = emigrant_df.merge(
+            metadata_with_genre[['obra_id', 'decade', 'genre_norm']],
+            on='obra_id',
+            how='left'
+        )
+        # Si ya tenía decade, no sobreescribir (pero normalmente no lo tiene)
+        if 'decade_y' in emigrant_df.columns:
+            emigrant_df['decade'] = emigrant_df['decade_y']
+            emigrant_df = emigrant_df.drop(columns=['decade_x', 'decade_y'])
         emigrant_df.to_csv(
             TABLES_DIR / "emigrant_mentions_by_work_enriched.csv", 
             index=False
@@ -214,9 +272,10 @@ def main():
     tokens = load_token_totals()
     case_counts = load_case_rankings()
     emigrant = load_emigrant_mentions()
+    genre = load_genre()
     
     # Construir tabla maestra
-    master_table = build_master_table(metadata, tokens, case_counts, emigrant)
+    master_table = build_master_table(metadata, tokens, case_counts, emigrant, genre)
     
     # Salvar tabla maestra
     output_file = TABLES_DIR / "corpus_master_table.csv"
@@ -225,13 +284,14 @@ def main():
     
     # Enriquecer archivos existentes
     print("\n[enrich] Enriqueciendo archivos existentes...")
-    enrich_existing_files(metadata)
+    enrich_existing_files(metadata, genre)
     
     # Resumen
     print("\n" + "="*70)
     print("RESUMEN:")
     print(f"  - Corpus total: {len(master_table)} obras")
     print(f"  - Con year: {(~master_table['year'].isna()).sum()}")
+    print(f"  - Con género (no unknown): {(master_table['genre_norm'] != 'unknown').sum()}")
     print(f"  - Con menciones emigrante: {(master_table['n_emigrant_mentions'] > 0).sum()}")
     print(f"  - Tokens totales: {master_table['tokens_total'].sum():,}")
     print("="*70 + "\n")

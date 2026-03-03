@@ -8,10 +8,14 @@ Genera PNG en 04_outputs/figures/ a partir de cases_raw y cooc_pairs.
 import argparse
 from collections import Counter, defaultdict
 from pathlib import Path
+import sys
 
 import matplotlib.pyplot as plt
 import networkx as nx
 import pandas as pd
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from figure_export import save_figure_variants
 
 
 def load_cases(cases_path: Path) -> list[dict]:
@@ -37,13 +41,13 @@ def fig_scene_coverage(cases: list[dict], outdir: Path) -> None:
     escenas = sorted(obras_por_escena.keys())
     counts = [len(obras_por_escena[e]) for e in escenas]
 
-    plt.figure(figsize=(10, 6))
+    fig = plt.figure(figsize=(10, 6))
     plt.bar(escenas, counts, color="#4c78a8")
     plt.xticks(rotation=45, ha="right")
     plt.ylabel("# obras unicas")
     plt.title("Cobertura por escena (obras unicas)")
     plt.tight_layout()
-    plt.savefig(outdir / "fig_scene_coverage.png", dpi=150)
+    save_figure_variants(fig, outdir / "fig_scene_coverage", dpi=150, save_png=True, save_pdf=False, save_jpeg=True, jpeg_quality=95)
     plt.close()
 
 
@@ -64,13 +68,13 @@ def fig_scene_concentration(cases: list[dict], outdir: Path) -> None:
         percent = (top3 / total * 100.0) if total else 0.0
         percents.append(percent)
 
-    plt.figure(figsize=(10, 6))
+    fig = plt.figure(figsize=(10, 6))
     plt.bar(escenas, percents, color="#f58518")
     plt.xticks(rotation=45, ha="right")
     plt.ylabel("% casos en top-3 obras")
     plt.title("Concentracion por escena (top-3 obras)")
     plt.tight_layout()
-    plt.savefig(outdir / "fig_scene_concentration.png", dpi=150)
+    save_figure_variants(fig, outdir / "fig_scene_concentration", dpi=150, save_png=True, save_pdf=False, save_jpeg=True, jpeg_quality=95)
     plt.close()
 
 
@@ -92,13 +96,13 @@ def fig_cooc_degree(cooc_rows: list[dict], outdir: Path) -> None:
     terms = [t for t, _ in top20]
     weights = [w for _, w in top20]
 
-    plt.figure(figsize=(10, 6))
+    fig = plt.figure(figsize=(10, 6))
     plt.bar(terms, weights, color="#54a24b")
     plt.xticks(rotation=45, ha="right")
     plt.ylabel("grado ponderado (n_cooc)")
     plt.title("Top 20 terminos por grado en coocurrencias")
     plt.tight_layout()
-    plt.savefig(outdir / "fig_cooc_degree.png", dpi=150)
+    save_figure_variants(fig, outdir / "fig_cooc_degree", dpi=150, save_png=True, save_pdf=False, save_jpeg=True, jpeg_quality=95)
     plt.close()
 
 
@@ -125,13 +129,13 @@ def fig_case_score_distribution(cases: list[dict], outdir: Path) -> bool:
         print("⚠️  Score vacio o no numerico; se omite fig_case_score_distribution")
         return False
 
-    plt.figure(figsize=(10, 6))
+    fig = plt.figure(figsize=(10, 6))
     plt.hist(scores, bins=20, color="#e45756", edgecolor="#222")
     plt.xlabel("score")
     plt.ylabel("frecuencia")
     plt.title("Distribucion de score en casos")
     plt.tight_layout()
-    plt.savefig(outdir / "fig_case_score_distribution.png", dpi=150)
+    save_figure_variants(fig, outdir / "fig_case_score_distribution", dpi=150, save_png=True, save_pdf=False, save_jpeg=True, jpeg_quality=95)
     plt.close()
     return True
 

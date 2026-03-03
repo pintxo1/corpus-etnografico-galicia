@@ -12,6 +12,9 @@ import networkx as nx
 from networkx.algorithms import community
 import numpy as np
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from figure_export import save_figure_variants
+
 
 def network_cooc_filtered(cooc_pairs_path, outdir, min_cooc=20, dpi=300):
     """Generate filtered co-occurrence network with static + interactive outputs"""
@@ -91,13 +94,8 @@ def network_cooc_filtered(cooc_pairs_path, outdir, min_cooc=20, dpi=300):
     
     plt.tight_layout()
     
-    png_path = Path(outdir) / "fig_cooc_network_filtered.png"
-    plt.savefig(png_path, dpi=dpi, bbox_inches='tight')
-    print(f"✅ {png_path} (DPI: {dpi})")
-    
-    pdf_path = Path(outdir) / "fig_cooc_network_filtered.pdf"
-    plt.savefig(pdf_path, format='pdf', bbox_inches='tight')
-    print(f"✅ {pdf_path}")
+    base_path = Path(outdir) / "fig_cooc_network_filtered"
+    save_figure_variants(fig, base_path, dpi=dpi, save_png=True, save_pdf=True, save_jpeg=True, jpeg_quality=95)
     
     plt.close()
     

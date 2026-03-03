@@ -10,6 +10,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from figure_export import save_figure_variants
+
 
 def heatmap_scene_work(cases_path, scene_summary_path, token_totals_path, outdir, dpi=300):
     """Generate scene x work heatmap (top 40 works + aggregated Others)"""
@@ -83,13 +86,9 @@ def heatmap_scene_work(cases_path, scene_summary_path, token_totals_path, outdir
     
     plt.tight_layout()
     
-    png_path = Path(outdir) / "fig_scene_work_heatmap.png"
-    plt.savefig(png_path, dpi=dpi, bbox_inches='tight')
-    print(f"✅ {png_path} (DPI: {dpi})")
-    
-    pdf_path = Path(outdir) / "fig_scene_work_heatmap.pdf"
-    plt.savefig(pdf_path, format='pdf', bbox_inches='tight')
-    print(f"✅ {pdf_path} (heatmap with top 40 works)")
+    base_path = Path(outdir) / "fig_scene_work_heatmap"
+    save_figure_variants(fig, base_path, dpi=dpi, save_png=True, save_pdf=True, save_jpeg=True, jpeg_quality=95)
+    print("✅ fig_scene_work_heatmap.* (heatmap with top 40 works)")
     
     plt.close()
     
@@ -127,9 +126,9 @@ def heatmap_scene_work(cases_path, scene_summary_path, token_totals_path, outdir
     cbar = plt.colorbar(im, ax=ax)
     cbar.set_label('cases/1k tokens', fontsize=9)
     
-    pdf_path_full = Path(outdir) / "fig_scene_work_heatmap_full.pdf"
-    plt.savefig(pdf_path_full, format='pdf', bbox_inches='tight', dpi=100)
-    print(f"✅ {pdf_path_full} (complete heatmap with all {len(all_obras)} works)")
+    base_path_full = Path(outdir) / "fig_scene_work_heatmap_full"
+    save_figure_variants(fig, base_path_full, dpi=300, save_png=False, save_pdf=True, save_jpeg=True, jpeg_quality=95)
+    print(f"✅ fig_scene_work_heatmap_full.* (complete heatmap with all {len(all_obras)} works)")
     
     plt.close()
 

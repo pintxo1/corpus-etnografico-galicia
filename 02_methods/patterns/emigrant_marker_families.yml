@@ -1,0 +1,143 @@
+# emigrant_marker_families.yml
+# Taxonomía de familias semánticas para marcadores de emigración
+# 
+# Cada familia agrupa labels semánticamente relacionados del corpus de marcadores emigrantes.
+# Permite análisis de "composición" de representaciones (stacked bars, CA, etc)
+
+families:
+  identidad_lengua:
+    label: "Identity & Language"
+    label_es: "Identidad & Lengua"
+    description: "Marcadores sobre identidad nacional, lengua, paisanía, compatriota"
+    color: "#3498DB"
+    keywords:
+      - gallego
+      - español
+      - europeo
+      - paisano
+      - compatriota
+      - identidad
+      - lengua
+  
+  movilidad_transporte:
+    label: "Mobility & Transport"
+    label_es: "Movilidad & Transporte"
+    description: "Buques, barcos, naves, pasajes, billetes, viajes trasatlánticos"
+    color: "#E74C3C"
+    keywords:
+      - transporte trasatlántico
+      - barco
+      - vapor
+      - buque
+      - nave
+      - pasaje
+      - billete
+      - viaje
+      - travesía
+  
+  destinos_redes:
+    label: "Destinations & Networks"
+    label_es: "Destinos & Redes"
+    description: "Lugares de destino, colonias españolas, comunidades emigrantes"
+    color: "#F39C12"
+    keywords:
+      - destino migratorio
+      - colonia española
+      - Habana
+      - Cuba
+      - Buenos Aires
+      - América
+      - colonia
+      - comunidad emigrante
+      - red diaspora
+  
+  economia_clase:
+    label: "Economy & Class"
+    label_es: "Economía & Clase"
+    description: "Pobreza, riqueza, fortuna, criados, peones, títulos, nobleza, comercio"
+    color: "#9B59B6"
+    keywords:
+      - pobreza
+      - miseria
+      - fortuna
+      - riqueza
+      - suerte
+      - criados
+      - peones
+      - jornalero
+      - títulos
+      - nobleza
+      - comercio
+      - negocio
+  
+  afectos_nostalgia:
+    label: "Affects & Nostalgia"
+    label_es: "Afectos & Nostalgia"
+    description: "Nostalgia, saudade, añoranza, destierro, exilio, morriña"
+    color: "#E67E22"
+    keywords:
+      - nostalgia
+      - saudade
+      - morriña
+      - añoranza
+      - destierro
+      - exilio
+      - lejanía
+      - separación
+      - duelo
+  
+  trabajo_explotacion:
+    label: "Labor & Exploitation"
+    label_es: "Trabajo & Explotación"
+    description: "Plantación, esclavitud, cautividad, labores coloniales, trabajo forzado"
+    color: "#C0392B"
+    keywords:
+      - plantación
+      - esclavitud
+      - cautividad
+      - trabajo colonial
+      - explotación
+      - labores
+      - endeude
+  
+  figura_indiano:
+    label: "Indianos"
+    label_es: "Indianos"
+    description: "Indiano, indiano rico, returnee indiano, riqueza americana"
+    color: "#27AE60"
+    keywords:
+      - indiano
+      - indiano rico
+      - returnee
+      - riqueza americana
+  
+  familia_vinculo:
+    label: "Family & Bonds"
+    label_es: "Familia & Vínculos"
+    description: "Familia, padres, hijos, esposa, marido, hermanos, parientes"
+    color: "#16A085"
+    keywords:
+      - familia
+      - padre
+      - madre
+      - hijo
+      - esposa
+      - marido
+      - hermano
+      - pariente
+      - hijo pródigo
+  
+  aldea_territorio:
+    label: "Home & Territory"
+    label_es: "Aldea & Territorio"
+    description: "Aldea, pueblo, casa, tierra, Galicia, región natal"
+    color: "#8E44AD"
+    keywords:
+      - aldea
+      - pueblo
+      - casa
+      - tierra
+      - Galicia
+      - región
+      - hogar
+      - caserio

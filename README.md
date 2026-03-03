@@ -115,8 +115,8 @@ No para "probar" nada, sino como **tecnología de lectura distante** (Moretti):
 │   ├── {case_id}.md         # Markdown por caso (contexto + memo)
 │   └── README_cases.md
 ├── reading_pack/
-│   ├── diverse/             # Diverse pack: 180 casos × 76 works (stratified)
-│   │   └── reading_pack_diverse.csv
+│   ├── diverse/             # Diverse pack: 180 casos × 74 works (stratified)
+│   │   └── reading_pack.csv
 │   └── balanced/            # Balanced pack: 160 casos × 10 per scene
 │       └── reading_pack_balanced.csv
 └── memos/
@@ -126,7 +126,7 @@ No para "probar" nada, sino como **tecnología de lectura distante** (Moretti):
 04_outputs/
 ├── tables/
 │   ├── scene_summary.csv           # 16 escenas with coverage & concentration
-│   ├── case_rankings.csv           # 3,550 cases with salience_z scores
+│   ├── case_rankings.csv           # 3,409 cases with salience_z scores
 │   ├── scene_rates_per_1k_tokens.csv  # Token-normalized rates
 │   ├── cooc_pairs.csv              # Coocurrencias (103 pares, min_cooc)
 │   ├── token_totals.csv            # Token counts per unidad
@@ -222,8 +222,9 @@ Archivos históricos (IGE, catastros, prensa) no "verifican" si literatura "dice
 ### Instalación
 
 ```bash
-# Clonar repositorio
-git clone https://github.com/tu-usuario/corpus-etnografico-galicia.git
+# Clonar repositorio (pendiente de publicacion en GitHub)
+# Mientras tanto, usa una ruta local:
+cp -R /ruta/local/corpus-etnografico-galicia ./corpus-etnografico-galicia
 cd corpus-etnografico-galicia
 
 # Crear entorno virtual (recomendado)
@@ -293,7 +294,7 @@ make cooc WINDOW=40        # Coocurrencias
 make audit-sampling        # Auditoria de reglas
 
 # 5. Muestreo estratificado (dos enfoques)
-make reading-pack-diverse   # 180 casos × 76 works (máxima diversidad)
+make reading-pack-diverse   # 180 casos × 74 works (máxima diversidad)
 make reading-pack-balanced  # 160 casos × 10 per scene (comparable)
 
 # 6. Visualizaciones
@@ -327,7 +328,7 @@ ls -1 03_analysis/cases/*.md | head -10
 
 ### 1. Dataset de Casos/Escenas Totales
 
-**`01_data/kwic_exports/cases_raw.csv`** (3,550 casos totales)
+**`01_data/kwic_exports/cases_raw.csv`** (3,409 casos totales)
 
 ```csv
 case_id,obra_id,unidad_id,escena_tipo,kwic,ventana_texto,start_idx,end_idx,match_term
@@ -337,12 +338,12 @@ case_id,obra_id,unidad_id,escena_tipo,kwic,ventana_texto,start_idx,end_idx,match
 
 ### 2. Packs de Lectura Estratificados
 
-**`03_analysis/reading_pack/diverse/reading_pack_diverse.csv`** (180 casos × 76 works)
+**`03_analysis/reading_pack/diverse/reading_pack.csv`** (180 casos × 74 works)
 - Muestreo diversificado: máxima cobertura de obras
 - Estratificación por escena + cluster de similitud
 - Útil para: exploraciones amplias, patrones corpus-level
 
-**`03_analysis/reading_pack/balanced/reading_pack_balanced.csv`** (160 casos × 10/escena)
+**`03_analysis/reading_pack/balanced/reading_pack_balanced.csv`** (160 casos × 10/escena, 34 obras)
 - Muestreo balanceado: comparable entre escenas
 - 10 casos por escena (16 × 10 = 160)
 - Útil para: análisis comparativo escena-a-escena
@@ -362,7 +363,7 @@ amor_deseo,25,690,31.25,27.39
 
 ### 4. Rankings de Casos por Escena
 
-**`04_outputs/tables/case_rankings.csv`** (3,550 casos con salience scores)
+**`04_outputs/tables/case_rankings.csv`** (3,409 casos con salience scores)
 
 ```csv
 case_id,obra_id,escena_tipo,salience_z,rank_in_scene
@@ -398,12 +399,31 @@ herencia_tierra,muerte_duelo,34,63,602,0.0541,"heredó la tierra de su padre mue
 
 ### 7. Visualizaciones Publication-Ready (Phase 9)
 
-**`04_outputs/figures/static/`** — PNG (150 DPI) + PDF (vector)
+**`04_outputs/figures/static/`** — PNG (300 DPI) + PDF (vector)
 
-1. **fig_scene_scatter** (coverage vs concentration): Corpus-level scene overview
-2. **fig_scene_work_heatmap** (escena × top 40 works): Scene-source mapping with token normalization
-3. **fig_scene_rates_distribution** (violin plots): Rate spread across 5 diverse scenes
-4. **fig_cooc_network_filtered** (13 nodes, 24 edges): Term co-occurrence + Louvain communities
+**Bilingual Figures (ES/EN)**: All evidence-pack figures are generated in Spanish and English, with 4 files per basename:
+- `{basename}_es.{png,pdf}` (Spanish version)
+- `{basename}_en.{png,pdf}` (English version)
+
+**Core Evidence Figures (7 basenames = 28 files):**
+1. `fig_emigrant_by_author_top15_{es,en}.{png,pdf}` — Top 15 authors by emigrant mentions
+2. `fig_emigrant_by_decade_{es,en}.{png,pdf}` — Temporal distribution by decade
+3. `fig_emigrant_by_format_{es,en}.{png,pdf}` — Distribution by literary genre
+4. `fig_emigrant_markers_top20_{es,en}.{png,pdf}` — Top 20 emigrant markers/keywords
+5. `fig_emigrant_heatmap_decade_author_{es,en}.{png,pdf}` — Decade×Author heatmap (=top12, 9+ authors)
+6. `fig_emigrant_heatmap_decade_author_full_{es,en}.{png,pdf}` — Full decade×author matrix
+7. `fig_emigrant_heatmap_decade_author_top12_{es,en}.{png,pdf}` — Top 12 authors heatmap
+
+**Additional Static Figures:**
+- **fig_scene_scatter** (coverage vs concentration): Corpus-level scene overview
+- **fig_scene_work_heatmap** (escena × top 40 works): Scene-source mapping with token normalization
+- **fig_scene_rates_distribution** (violin plots): Rate spread across 5 diverse scenes
+- **fig_cooc_network_filtered** (13 nodes, 24 edges): Term co-occurrence + Louvain communities
+
+**Translation Infrastructure:**
+- `02_methods/scripts_core/i18n_figures.py` — Translation module (ES/EN dictionaries, save helpers)
+- Heatmaps use pragmatic duplication (minimal translatable text: author names, decades)
+- QA validation: `make qa-final` verifies all 28 bilingual files exist
 
 **`04_outputs/figures/interactive/`** — HTML (self-contained)
 
@@ -416,7 +436,7 @@ herencia_tierra,muerte_duelo,34,63,602,0.0541,"heredó la tierra de su padre mue
 
 **`04_outputs/reports/REPORT.md`** (9 secciones + subsecciones)
 
-1. Run Summary (80 TEI, 177 units, 3,550 cases, 16 scenes)
+1. Run Summary (80 TEI, 177 units, 3,409 cases, 16 scenes)
 2. Scene Coverage & Concentration
 3. Reading Packs (Diverse vs Balanced)
 4. Audit & Reproducibility
@@ -496,20 +516,22 @@ MIT License - Ver [LICENSE](LICENSE)
 ## 🛠️ Roadmap & Fases Completadas
 
 **Fase 1-4 ✅ COMPLETE:** Etnographic auditing, rule-constrained sampling, state verification  
-**Fase 5-6 ✅ COMPLETE:** Dual reading pack system (diverse 180/76, balanced 160/29)  
+**Fase 5-6 ✅ COMPLETE:** Dual reading pack system (diverse 180/74, balanced 160/34)  
 **Fase 7 ✅ COMPLETE:** Bug fixes + token rates analysis  
 **Fase 8 ✅ COMPLETE:** End-to-end verification (make report executable)  
 **Fase 9 ✅ COMPLETE:** Advanced DH visualizations (scatter, heatmap, violin, network, dashboard)  
+**Fase 10 ✅ COMPLETE:** Etnographic memo expansion (memos base + plantillas)  
+**Fase 11 ✅ COMPLETE:** Evidence Pack emigrante (v2tokens + reportes)  
+**Fase 12B ✅ COMPLETE:** Metadata TEI nativo + análisis temporal + perfiles emigrantes  
 
 **Próximas fases (en progreso):**
-- [ ] Fase 10: Etnographic memo expansion (~30 memos curado)
 - [ ] Contrapunto con docs IGE (emigración 1860-1950)
 - [ ] Análisis de silencios (¿qué no aparece en literatura?)
 - [ ] Mapas culturales (topónimos + densidades)
 - [ ] Artículo metodológico + comunicación AIBR (Patrimonios, Cambio y Resistencias)
 
-**Documentation:**
-- [x] README.md (updated Phase 9)
+**Documentación:**
+- [x] README.md (actualizado hasta Fase 12B)
 - [x] CHANGELOG_PHASE9.md (detailed)
 - [x] PHASE_9_EXECUTIVE_SUMMARY.md (user guide)
 - [x] VISUALIZATIONS_README.md (technical)
@@ -519,9 +541,9 @@ MIT License - Ver [LICENSE](LICENSE)
 
 ## 💬 Contacto y Contribuciones
 
-**Autor:** [Tu Nombre]  
-**Email:** tu@email.com  
-**GitHub:** [@tu-usuario](https://github.com/tu-usuario)
+**Autor:** Daniel Martinez Perez  
+**Email:** dmartinez@fsof.uned.es  
+**GitHub:** [@pintxo1](https://github.com/pintxo1)
 
 **Contribuciones**: Bienvenidas vía issues/PRs. Este es un proyecto experimental y abierto a crítica metodológica.
 
